@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Έρευνα αγοράς — Online Coaching για κίνηση, ανακούφιση από πόνο και mobility</title>
+<style>
+  :root{
+    --navy:#1F3A5F; --navy-2:#2E5E8C; --teal:#2E8B8B; --teal-deep:#1f6b6b;
+    --amber:#C97B1E; --amber-soft:#f0e0c8; --gold:#E0A92E;
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1d2530; --muted:#5e7384; --line:#e2e7ee;
+    --m1:#2E5E8C; --m2:#2E8B8B; --m3:#7a4fa3; --m4:#C97B1E;
+    --shadow:0 1px 3px rgba(20,40,70,.08),0 6px 22px rgba(20,40,70,.07);
+    --radius:14px;
+  }
+  body.dark{
+    --navy:#bfd2e6; --navy-2:#9cc0e0; --teal:#5bc4c4;
+    --bg:#0f161e; --card:#18222e; --ink:#e7edf4; --muted:#9fb0c0; --line:#27333f;
+    --amber-soft:#3a3020;
+    --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 22px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;font-size:15.5px;-webkit-font-smoothing:antialiased}
+  a{color:var(--teal);text-decoration:none}
+  a:hover{text-decoration:underline}
+  sup a{font-size:10px;font-weight:700;padding:0 1px}
+
+  .topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;display:flex;
+    align-items:center;gap:14px;padding:10px 22px;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+  body.dark .topbar{background:#0b1119;border-bottom:1px solid var(--line)}
+  .topbar .brand{font-weight:700;letter-spacing:.3px;font-size:15px}
+  .topbar .brand span{opacity:.7;font-weight:400}
+  .topbar .spacer{flex:1}
+  .topbar button{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.22);
+    padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px}
+  .topbar button:hover{background:rgba(255,255,255,.22)}
+
+  .wrap{max-width:1460px;margin:0 auto;padding:0 22px}
+  .layout{display:grid;grid-template-columns:250px 1fr;gap:34px;align-items:start}
+  nav.toc{position:sticky;top:74px;font-size:13.5px;padding:18px 0;max-height:calc(100vh - 90px);overflow:auto}
+  nav.toc h4{margin:0 0 8px;text-transform:uppercase;letter-spacing:.9px;font-size:11px;color:var(--muted)}
+  nav.toc a{display:block;color:var(--muted);padding:5px 10px;border-left:2px solid transparent;border-radius:0 6px 6px 0}
+  nav.toc a:hover{color:var(--ink);background:var(--card);text-decoration:none}
+  nav.toc a.active{color:var(--navy);border-left-color:var(--teal);background:var(--card);font-weight:600}
+  main{padding:22px 0 80px;min-width:0}
+
+  .hero{background:linear-gradient(135deg,var(--navy),#15466e 60%,var(--teal-deep));color:#fff;border-radius:18px;
+    padding:34px 36px;margin:18px 0 30px;box-shadow:var(--shadow)}
+  .hero .kicker{text-transform:uppercase;letter-spacing:2px;font-size:11.5px;opacity:.8}
+  .hero h1{margin:8px 0 8px;font-size:29px;line-height:1.18;font-weight:750}
+  .hero p.sub{margin:0;opacity:.92;font-size:16px;max-width:790px}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;font-size:12.5px}
+  .hero .meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:5px 11px;border-radius:20px}
+
+  section{margin:0 0 16px;scroll-margin-top:72px}
+  h2{font-size:23px;color:var(--navy);margin:34px 0 8px;font-weight:740;display:flex;align-items:center;gap:10px}
+  h2 .n{font-size:13px;background:var(--teal);color:#fff;min-width:26px;height:26px;border-radius:7px;display:inline-flex;
+    align-items:center;justify-content:center;font-weight:700;flex:none;padding:0 4px}
+  h3{font-size:17px;color:var(--navy-2);margin:24px 0 8px;font-weight:680}
+  .lead{color:var(--muted);font-size:15px;margin:2px 0 14px;max-width:880px}
+  p{margin:11px 0;max-width:900px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  @media(max-width:860px){.g2{grid-template-columns:1fr}}
+
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap}
+  .c1{background:rgba(46,94,140,.14);color:var(--m1)}
+  .c2{background:rgba(46,139,139,.16);color:var(--teal-deep)}
+  .c3{background:rgba(122,79,163,.15);color:var(--m3)}
+  .c4{background:rgba(201,123,30,.16);color:var(--m4)}
+  body.dark .c1{background:rgba(120,170,220,.2);color:#9cc0e0}
+  body.dark .c2{background:rgba(91,196,196,.2);color:#7fd6d6}
+  body.dark .c3{background:rgba(170,130,210,.22);color:#c6a8e0}
+  body.dark .c4{background:rgba(220,160,80,.22);color:#e7c98c}
+  .reg{font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);background:var(--card)}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  #brandtable{table-layout:fixed;min-width:760px}
+  #brandtable th,#brandtable td{overflow-wrap:break-word;word-break:normal}
+  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--navy);color:#fff;position:sticky;top:0;font-weight:600;font-size:12.5px}
+  th.sortable{cursor:pointer;user-select:none}
+  th.sortable:hover{background:var(--navy-2)}
+  th.sortable::after{content:"⇅";opacity:.4;margin-left:5px;font-size:11px}
+  th.sortasc::after{content:"↑";opacity:1}
+  th.sortdesc::after{content:"↓";opacity:1}
+  tbody tr:hover{background:rgba(46,139,139,.05)}
+  td .bn{font-weight:700;color:var(--navy);font-size:13.8px}
+  td .who{color:var(--muted);font-size:11.5px;display:block;margin-top:2px}
+  .price b{color:var(--ink)}
+  .vok{color:var(--teal-deep);font-weight:700} .vno{color:var(--muted)}
+  .nowrap{white-space:nowrap}
+  caption{caption-side:bottom;text-align:left;color:var(--muted);font-size:12px;padding:10px 4px;line-height:1.55}
+
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 12px}
+  .controls input[type=search]{flex:1;min-width:180px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;
+    background:var(--card);color:var(--ink);font-size:14px}
+  .seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--card);flex-wrap:wrap}
+  .seg button{border:0;background:transparent;color:var(--muted);padding:8px 13px;cursor:pointer;font-size:13px;font-weight:600}
+  .seg button.on{background:var(--navy);color:#fff}
+  .chipset{display:flex;gap:7px;flex-wrap:wrap}
+  .chipset button{border:1px solid var(--line);background:var(--card);color:var(--muted);padding:7px 12px;border-radius:20px;
+    cursor:pointer;font-size:12.5px;font-weight:600}
+  .chipset button.on{border-color:transparent;color:#fff}
+  .chipset button.on[data-m="prog"]{background:var(--m1)}
+  .chipset button.on[data-m="sub"]{background:var(--teal)}
+  .chipset button.on[data-m="coach"]{background:var(--m3)}
+  .chipset button.on[data-m="cert"]{background:var(--m4)}
+  .count{color:var(--muted);font-size:12.5px;margin-left:auto}
+  .methodleg{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin:0 0 12px}
+
+  .mapcard{padding:14px}
+  svg.posmap{width:100%;height:auto;display:block}
+  svg.posmap g.pt{cursor:default}
+  .maplegend{display:grid;grid-template-columns:repeat(2,1fr);gap:3px 22px;margin-top:12px;font-size:12.3px}
+  @media(max-width:680px){.maplegend{grid-template-columns:1fr}}
+  .maplegend .li{display:flex;gap:8px;align-items:baseline;padding:2px 0}
+  .maplegend .bb{flex:none;width:19px;height:19px;border-radius:50%;color:#fff;font-size:11px;font-weight:700;
+    display:inline-flex;align-items:center;justify-content:center}
+  .maplegend .nm{color:var(--ink)}
+  .grpkey{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:10px;font-size:12.5px;color:var(--muted)}
+  .grpkey span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+
+  .note{border-radius:10px;padding:13px 16px;font-size:14px;margin:14px 0}
+  .note.info{background:rgba(46,94,140,.08);border:1px solid rgba(46,94,140,.25)}
+  .note .h{font-weight:700;display:block;margin-bottom:3px}
+
+  ol.steps{counter-reset:p;list-style:none;padding:0;margin:12px 0}
+  ol.steps li{position:relative;padding:12px 0 12px 44px;border-bottom:1px solid var(--line)}
+  ol.steps li:last-child{border-bottom:0}
+  ol.steps li::before{counter-increment:p;content:counter(p);position:absolute;left:0;top:11px;width:28px;height:28px;
+    background:var(--navy);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+  ol.steps li b{color:var(--navy)}
+
+  .keypoint{border-left:5px solid var(--teal);background:linear-gradient(90deg,rgba(46,139,139,.08),transparent 60%)}
+  .keypoint .tag{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;
+    letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:6px;margin-bottom:8px}
+  .keypoint b{color:var(--navy)}
+
+  footer{color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);margin-top:40px;padding:22px 0}
+  .src{font-size:12.5px;color:var(--muted);word-break:break-word;line-height:1.8}
+
+  @media(max-width:920px){.layout{grid-template-columns:1fr}nav.toc{display:none}}
+  @media print{
+    .topbar,nav.toc,.controls{display:none!important}
+    .layout{grid-template-columns:1fr}
+    body{background:#fff;font-size:11px}
+    .hero{background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .card,.tablewrap{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">Έρευνα αγοράς · <span>Online coaching για κίνηση &amp; ανακούφιση από πόνο</span></div>
+  <div class="spacer"></div>
+  <button onclick="window.print()">🖨 Εκτύπωση / PDF</button>
+  <button id="themeBtn">🌙 Σκούρο</button>
+</div>
+
+<div class="wrap">
+<div class="layout">
+
+<nav class="toc">
+  <h4>Περιεχόμενα</h4>
+  <a href="#intro">Τι καλύπτει αυτή η αναφορά</a>
+  <a href="#players">1 · Ποιοι πετυχαίνουν</a>
+  <a href="#money">2 · Πώς βγάζουν χρήματα</a>
+  <a href="#patterns">3 · Τι τους κάνει επιτυχημένους</a>
+  <a href="#staying">4 · Πόσοι πελάτες παραμένουν</a>
+  <a href="#opportunity">5 · Πού βρίσκεται η ευκαιρία</a>
+  <a href="#sources">Πηγές &amp; σημειώσεις</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="kicker">Έρευνα αγοράς</div>
+    <h1>Online coaching για κίνηση, ανακούφιση από πόνο και mobility: ποιοι πετυχαίνουν, πώς κερδίζουν και πού υπάρχει χώρος για ένα νέο brand</h1>
+    <p class="sub">Μια ματιά στις επιχειρήσεις διεθνώς και στην Ελλάδα που βοηθούν τους ανθρώπους να κινούνται καλύτερα και να βγαίνουν από τον πόνο. Η αναφορά περιγράφει τι κάνουν αυτές οι επιχειρήσεις και πώς βγάζουν χρήματα. Η τελευταία ενότητα είναι το μόνο σημείο όπου δίνουμε τη δική μας άποψη για το πού βρίσκεται η καλύτερη ευκαιρία.</p>
+    <div class="meta">
+      <span>📅 19/06/2026</span>
+      <span>🔎 Περίπου 22 brands μελετήθηκαν</span>
+      <span>🔗 Πηγές συνδεδεμένες μέσα στο κείμενο</span>
+    </div>
+  </div>
+
+  <!-- ============ INTRO ============ -->
+  <section id="intro">
+    <h2><span class="n">i</span>Τι καλύπτει αυτή η αναφορά</h2>
+    <p>Αυτή η αναφορά εξετάζει επιχειρήσεις σε όλο τον κόσμο που βοηθούν τους ανθρώπους να κινούνται καλύτερα, να βγαίνουν από τον πόνο και να βελτιώνουν το mobility τους — για παράδειγμα να μειώνουν τον πόνο στη μέση, τη δυσκαμψία στους γοφούς ή τον πόνο στα γόνατα, και να συνεχίζουν να κινούνται καλά όσο μεγαλώνουν. Αυτές οι επιχειρήσεις σχεδόν πάντα χτίζονται γύρω από έναν coach ή μία επώνυμη μέθοδο προπόνησης, και πουλούν τη βοήθειά τους online.</p>
+    <p>Μελετήσαμε περίπου είκοσι από αυτές: τα πιο γνωστά διεθνή ονόματα και τους βασικούς παίκτες στην ελληνική αγορά. Για κάθε μία κοιτάξαμε τέσσερα απλά πράγματα — τι πουλούν, πόσο χρεώνουν, πώς βγάζουν χρήματα και τι φαίνεται να τις κάνει να δουλεύουν.</p>
+    <p>Οι πρώτες τέσσερις ενότητες απλώς περιγράφουν τι βρήκαμε, χωρίς απόψεις. <b>Η τελευταία ενότητα είναι το μόνο σημείο όπου δίνουμε τη δική μας άποψη</b>: με βάση τον ανταγωνισμό και τα κενά που βλέπουμε, πού υπάρχει χώρος για ένα νέο brand.</p>
+  </section>
+
+  <!-- ============ PLAYERS ============ -->
+  <section id="players">
+    <h2><span class="n">1</span>Ποιοι πετυχαίνουν</h2>
+    <p>Ο χώρος οδηγείται από έναν μικρό αριθμό γνωστών coaches και μεθόδων. Οι περισσότεροι βρίσκονται στις Ηνωμένες Πολιτείες και δουλεύουν στα αγγλικά, ενώ μερικοί έχουν εξελιχθεί σε μεγάλες εταιρείες.</p>
+    <p>Το πιο καθαρό παράδειγμα ολοκληρωμένης επιχείρησης είναι η <b><a href="https://www.liebscher-bracht.com/en/" target="_blank" rel="noopener">Liebscher &amp; Bracht</a></b> στη Γερμανία. Προσφέρουν δωρεάν μια μεγάλη βιβλιοθήκη με σύντομα pain-relief videos στο YouTube, που τους έφερε πάνω από 1,5 εκατομμύριο followers. Αυτό το δωρεάν κοινό στη συνέχεια αγοράζει ένα paid app, βιβλία τυπωμένα σε περίπου δέκα γλώσσες και θεραπείες από ένα δίκτυο με περισσότερους από 3.000 πιστοποιημένους therapists. Αναφέρεται ότι η εταιρεία βγάζει περίπου €15 εκατομμύρια τον χρόνο.<sup><a href="#s1">[1]</a></sup> Είναι σημαντικό γιατί είναι γερμανική, όχι αμερικανική — δείχνει ότι αυτό το είδος επιχείρησης μπορεί να πετύχει έξω από τον αγγλόφωνο κόσμο.</p>
+    <p>Άλλα δυνατά διεθνή ονόματα δουλεύουν με παρόμοιους τρόπους. Το <b><a href="https://atgforcoaches.com" target="_blank" rel="noopener">ATG / Knees Over Toes</a></b> πουλά ένα app στο κοινό και πιστοποιεί άλλους coaches που πληρώνουν μηνιαία συνδρομή και κάνουν το hands-on coaching, ώστε ο founder να μη χρειάζεται να coachάρει ο ίδιος τον κόσμο. Το <b><a href="https://thereadystate.com" target="_blank" rel="noopener">The Ready State</a></b> πουλά μια χαμηλή μηνιαία συνδρομή με mobility και pain routines οργανωμένες ανά σημείο του σώματος. Το <b><a href="https://functionalpatterns.com" target="_blank" rel="noopener">Functional Patterns</a></b> χρησιμοποιεί ένα σχετικά φθηνό program ως entry point για μια ακριβή coach certification. Τρία accounts που συχνά αναφέρονται ως συγκρίσιμα — <b><a href="https://davidgreyrehab.com" target="_blank" rel="noopener">David Grey Rehab</a></b>, <b><a href="https://ikneurology.com" target="_blank" rel="noopener">Integrated Kinetic Neurology</a></b> και <b><a href="https://www.skool.com/bodybuildingnotbodybreaking" target="_blank" rel="noopener">Swolesam</a></b> — τα πάνε καλά, αλλά το καθένα χρησιμοποιεί μόνο έναν τρόπο εσόδων και αφήνει τους άλλους ανεκμετάλλευτους.</p>
+    <p>Η ελληνική αγορά δείχνει πολύ διαφορετική. Οι coaches με τα μεγαλύτερα κοινά εστιάζουν στο γενικό fitness και στο σχήμα σώματος, όχι στον πόνο ή στη διορθωτική δουλειά. Το personal coaching πουλιέται κυρίως μέσω messaging apps όπως Viber και Instagram, χωρίς dedicated app από πίσω. Οι fitness certifications που προσφέρονται φέρουν ξένα brands και απλώς μεταπωλούνται στα ελληνικά. Με άλλα λόγια, η Ελλάδα έχει τους πελάτες και τη ζήτηση, αλλά δεν έχει αναγνωρίσιμο ελληνικό brand χτισμένο γύρω από pain relief, mobility και τη δική του μέθοδο coach.</p>
+
+    <h3>Κάθε brand που μελετήσαμε</h3>
+    <p class="lead">Μπορείς να ψάξεις τον πίνακα, να τον φιλτράρεις με βάση το πώς κερδίζει κάθε brand ή να τον ταξινομήσεις με βάση τη χαμηλότερη μηνιαία τιμή. Κάθε όνομα οδηγεί στο website της εταιρείας.</p>
+    <div class="methodleg">
+      <span><span class="pill c1">Programs</span> πωλούνται μία φορά, μένουν για πάντα</span>
+      <span><span class="pill c2">Subscription</span> πληρωμή κάθε μήνα</span>
+      <span><span class="pill c3">Coaching</span> ένα άτομο τη φορά</span>
+      <span><span class="pill c4">Certification</span> εκπαίδευση/πιστοποίηση άλλων coaches</span>
+    </div>
+    <div class="controls">
+      <input type="search" id="q" placeholder="Αναζήτηση με όνομα, τύπο ή σημείωση…">
+      <div class="seg" id="grpseg">
+        <button data-g="all" class="on">Όλα</button>
+        <button data-g="intl">Διεθνή</button>
+        <button data-g="greek">Ελληνική αγορά</button>
+      </div>
+      <div class="chipset" id="mchips">
+        <button data-m="prog">Programs</button>
+        <button data-m="sub">Subscription</button>
+        <button data-m="coach">Coaching</button>
+        <button data-m="cert">Certification</button>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table id="brandtable">
+        <colgroup>
+          <col style="width:11%"><col style="width:6%"><col style="width:12%"><col style="width:16%">
+          <col style="width:9%"><col style="width:6%"><col style="width:40%">
+        </colgroup>
+        <thead><tr>
+          <th class="sortable" data-k="name">Brand</th>
+          <th>Χώρα</th>
+          <th>Σε τι εστιάζουν</th>
+          <th>Τι πουλούν &amp; τιμή</th>
+          <th>Πώς κερδίζουν</th>
+          <th class="sortable" data-k="approxMo">Χαμηλότερη €/μήνα</th>
+          <th>Τι δείχνει αυτό για την αγορά</th>
+        </tr></thead>
+        <tbody id="brandbody"></tbody>
+      </table>
+    </div>
+    <div class="count" id="brandcount" style="margin-top:8px"></div>
+    <p class="src" style="margin-top:6px">Το "Χαμηλότερη €/μήνα" είναι η χαμηλότερη μηνιαία τιμή που προσφέρει κάθε brand, σε ευρώ ώστε τα brands να συγκρίνονται μεταξύ τους (εδώ τα δολάρια ΗΠΑ θεωρούνται περίπου ίσα με το ευρώ). Τα brands που πουλούν μόνο one-time προϊόντα δείχνουν "—". Το <span class="vok">✓</span> σημαίνει ότι επιβεβαιώσαμε την τιμή στο website της ίδιας της εταιρείας· το <span class="vno">~</span> σημαίνει ότι προέρχεται από άλλες πηγές και μπορεί να μην είναι ακριβής.</p>
+  </section>
+
+  <!-- ============ MONEY ============ -->
+  <section id="money">
+    <h2><span class="n">2</span>Πώς βγάζουν χρήματα</h2>
+    <p>Υπάρχουν μερικοί βασικοί τρόποι με τους οποίους αυτές οι επιχειρήσεις κερδίζουν. Κανένας δεν είναι καινούριος, και οι πιο επιτυχημένες επιχειρήσεις χρησιμοποιούν αρκετούς μαζί αντί να βασίζονται μόνο σε έναν. Να κάθε τρόπος, με απλά λόγια.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Τρόπος εσόδων</th><th>Τι είναι</th><th>Δυνατό σημείο</th><th>Αδύναμο σημείο</th><th>Τυπική τιμή</th></tr></thead>
+        <tbody>
+          <tr><td><b>Έτοιμα programs</b> (πληρωμή μία φορά)</td><td>Ένα σταθερό program με videos και πλάνο, που αγοράζεται μία φορά και μένει για πάντα. Ο πελάτης το ακολουθεί μόνος του.</td><td>Είναι φθηνό να τρέχει αφού δημιουργηθεί, και είναι ο πιο γρήγορος τρόπος για να αρχίσουν τα έσοδα.</td><td>Τα χρήματα δεν επαναλαμβάνονται — πρέπει συνεχώς να βρίσκεις νέους αγοραστές. Πολλοί δεν τελειώνουν ποτέ ένα program που κάνουν μόνοι τους.</td><td class="price">€40–200 (έως €300–500 για flagship)</td></tr>
+          <tr style="background:rgba(46,139,139,.07)"><td><b>Μηνιαία subscription</b> (app ή βιβλιοθήκη)</td><td>Τα μέλη πληρώνουν κάθε μήνα για ένα app ή μια video library που συνεχίζει να παίρνει νέο περιεχόμενο.</td><td>Σταθερό, επαναλαμβανόμενο εισόδημα που μεγαλώνει καλά με λίγο προσωπικό χρόνο. Περίπου τα τρία τέταρτα όλων των εσόδων των fitness apps έρχονται πλέον από subscriptions.</td><td>Τα μέλη φεύγουν με τον καιρό, άρα πρέπει να τα κρατάς ενεργά με φρέσκο περιεχόμενο και community.</td><td class="price">€10–20 τον μήνα (περίπου €120–240 τον χρόνο)</td></tr>
+          <tr><td><b>Personal online coaching</b> (ένα άτομο τη φορά)</td><td>Ένα ιδιωτικό, εξατομικευμένο πλάνο με τακτικά check-ins, συνήθως μέσω app ή μηνυμάτων.</td><td>Η υψηλότερη τιμή ανά πελάτη και τα καλύτερα αποτελέσματα, επειδή είναι προσωπικό.</td><td>Δεν μεγαλώνει εύκολα — το εισόδημα περιορίζεται από τις ώρες του ίδιου του coach. Καλύτερα να μένει ως μικρή, πιο ακριβή επιλογή.</td><td class="price">€150–500+ τον μήνα (περίπου €60–120 στην Ελλάδα σήμερα)</td></tr>
+          <tr style="background:rgba(201,123,30,.07)"><td><b>Certification άλλων trainers</b></td><td>Άλλοι trainers πληρώνουν για να μάθουν τη μέθοδο, να πάρουν certificate και να μπουν σε directory.</td><td>Πουλά σε επαγγελματίες, που πληρώνουν περισσότερο από το κοινό· μετατρέπει μια προσωπική μέθοδο σε αναγνωρισμένο standard· μεγαλώνει πολύ πέρα από τις ώρες του founder.</td><td>Η μέθοδος πρέπει πρώτα να έχει αποδειχθεί και να είναι εύκολη στη διδασκαλία, και πρέπει ήδη να υπάρχει ζήτηση από το κοινό.</td><td class="price">€500–2.000 ανά level</td></tr>
+          <tr style="background:rgba(201,123,30,.07)"><td><b>Δίκτυο πιστοποιημένων coaches</b></td><td>Πιστοποιημένοι coaches εφαρμόζουν τη μέθοδο κάτω από το brand, και ο founder παίρνει ποσοστό από τα έσοδά τους ή ετήσιο licence fee.</td><td>Το εισόδημα μεγαλώνει μαζί με όλο το δίκτυο, όχι μόνο με τον founder. Είναι ο πιο scalable τρόπος από όλους.</td><td>Είναι ο πιο δύσκολος να χτιστεί και να διαχειριστεί· χρειάζεται πρώτα μεγάλη ομάδα coaches και καθαρές συμφωνίες.</td><td class="price">Ετήσιο licence €100–500, ή ποσοστό από τα έσοδα των coaches</td></tr>
+          <tr><td><b>Live seminars και workshops</b></td><td>Δια ζώσης ή live online events που διδάσκουν τη μέθοδο, συνήθως σε υψηλή τιμή.</td><td>Υψηλή τιμή ανά event, δυνατή εμπιστοσύνη και word of mouth· συχνά το πρώτο βήμα προς certification.</td><td>Ο founder πρέπει να είναι παρών, άρα δεν μεγαλώνει μόνο του· τα ταξίδια και ο χώρος κοστίζουν.</td><td class="price">€200–800 ανά άτομο ανά ημέρα</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Το pattern στις πιο επιτυχημένες επιχειρήσεις είναι καθαρό: συνδυάζουν αυτούς τους τρόπους σε μία σκάλα. Ξεκινούν τον κόσμο με δωρεάν περιεχόμενο, τον μεταφέρουν σε ένα low-cost program, μετά σε μηνιαία subscription, και τελικά προσφέρουν πιο ακριβό personal coaching και, αργότερα, coach certification. Τα φθηνά προϊόντα φέρνουν τον κόσμο μέσα· η subscription δίνει σταθερό εισόδημα· και το certification μαζί με το δίκτυο coaches είναι αυτά που αφήνουν την επιχείρηση να μεγαλώνει χωρίς να χρειάζεται περισσότερος προσωπικός χρόνος από τον founder.</p>
+  </section>
+
+  <!-- ============ PATTERNS ============ -->
+  <section id="patterns">
+    <h2><span class="n">3</span>Τι τους κάνει επιτυχημένους</h2>
+    <p>Αν δούμε όλα τα επιτυχημένα brands μαζί, οι ίδιες συνήθειες εμφανίζονται ξανά και ξανά. Αυτά δεν είναι απόψεις· είναι τα πράγματα που πραγματικά κάνουν οι νικητές.</p>
+    <ol class="steps">
+      <li><b>Ξεκινούν με μια καθαρή υπόσχεση αποτελέσματος.</b> Πουλούν "ξεφορτώσου τον πόνο στη μέση" ή "κινήσου ξανά καλά", και κρατούν το όνομα της μεθόδου τους στο background ως τη μηχανή πίσω από αυτή την υπόσχεση, όχι ως headline.</li>
+      <li><b>Δίνουν πολύ δωρεάν εκπαιδευτικό περιεχόμενο.</b> Στο YouTube και στο Instagram εξηγούν γιατί πονά το σώμα και πώς λειτουργεί. Αυτό το δωρεάν περιεχόμενο και προσελκύει πελάτες και αφήνει τον κόσμο να δει πώς είναι το paid product πριν αγοράσει.</li>
+      <li><b>Αφήνουν τον κόσμο να αγοράσει απευθείας από website.</b> Οι πελάτες μπορούν να πληρώσουν και να ξεκινήσουν μόνοι τους, χωρίς ανταλλαγή μηνυμάτων. Έτσι ο χρόνος του coach μένει ελεύθερος και η πώληση γίνεται.</li>
+      <li><b>Φτιάχνουν ξεχωριστή σελίδα για κάθε πρόβλημα.</b> Μια σελίδα για πόνο στη μέση, άλλη για γόνατα, άλλη για αυχένα. Όταν κάποιος ψάχνει online ακριβώς αυτό το πρόβλημα, βρίσκει το brand.</li>
+      <li><b>Μετατρέπουν τα programs σε group challenges.</b> Πολύ περισσότεροι τελειώνουν ένα program όταν το κάνουν μαζί ως timed group παρά όταν το κάνουν μόνοι τους — και όσοι το τελειώνουν παίρνουν αποτελέσματα, αφήνουν καλές κριτικές και μένουν περισσότερο.</li>
+      <li><b>Αφήνουν άλλους coaches να κάνουν τη hands-on δουλειά.</b> Ο founder κατέχει τη μέθοδο και το brand, ενώ πιστοποιημένοι coaches παραδίδουν το coaching. Έτσι μεγαλώνει η επιχείρηση χωρίς ο founder να δουλεύει περισσότερες ώρες.</li>
+      <li><b>Χρησιμοποιούν ένα φθηνό προϊόν για να τροφοδοτήσουν δύο ροές εσόδων.</b> Το ίδιο low-cost program που αγοράζει το κοινό είναι και το πρώτο βήμα που πρέπει να ολοκληρώσει ένας coach πριν πιστοποιηθεί, άρα ένα κομμάτι περιεχομένου κάνει δύο δουλειές.</li>
+    </ol>
+  </section>
+
+  <!-- ============ STAYING ============ -->
+  <section id="staying">
+    <h2><span class="n">4</span>Πόσοι πελάτες παραμένουν</h2>
+    <p>Μια μηνιαία subscription δουλεύει μόνο αν ο κόσμος συνεχίζει να πληρώνει μήνα με τον μήνα, και το να τους κρατήσεις είναι το πιο δύσκολο κομμάτι όλης της επιχείρησης. Είναι επίσης ο λόγος που τα group challenges και τα communities έχουν τόσο μεγάλη σημασία. Τα στοιχεία παρακάτω προέρχονται από αρκετές ανεξάρτητες πηγές του κλάδου και περιγράφουν τον χώρο συνολικά.<sup><a href="#s2">[2]</a></sup></p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Τι μετράμε</th><th>Τι δείχνουν τα δεδομένα</th></tr></thead>
+        <tbody>
+          <tr><td>Άνθρωποι που τελειώνουν ένα program που ακολουθούν μόνοι τους</td><td>Μόνο περίπου <b>15–40%</b> το τελειώνουν. Στα δωρεάν programs είναι συχνά κάτω από 15%.</td></tr>
+          <tr style="background:rgba(46,139,139,.07)"><td>Άνθρωποι που τελειώνουν ένα group challenge ή course με community</td><td>Περίπου <b>70–90%</b> το τελειώνουν — πολύ περισσότεροι από όσους το κάνουν μόνοι τους.</td></tr>
+          <tr><td>Μέλη που ακυρώνουν ένα fitness app κάθε μήνα</td><td>Περίπου <b>9 στους 100</b> κατά μέσο όρο. Τα καλύτερα apps το κρατούν κοντά στους <b>2 στους 100</b>.</td></tr>
+          <tr><td>Ετήσια plans σε σχέση με πληρωμή μήνα-μήνα</td><td>Όσοι έχουν ετήσιο plan μένουν <b>40–60% περισσότερο</b> από όσους πληρώνουν κάθε μήνα.</td></tr>
+          <tr style="background:rgba(46,139,139,.07)"><td>Επίδραση του community</td><td>Οι μηνιαίες ακυρώσεις πέφτουν από περίπου <b>9% σε περίπου 6%</b> όταν υπάρχει community.</td></tr>
+          <tr><td>Από πού έρχονται τα χρήματα στα fitness apps</td><td>Περίπου <b>τα τρία τέταρτα</b> όλων των εσόδων των fitness apps είναι από subscriptions.</td></tr>
+        </tbody>
+        <caption>Πηγές: industry benchmark reports και μελέτες για online-course completion.<sup><a href="#s2">[2]</a></sup> Δεν υπάρχουν αξιόπιστα στοιχεία ειδικά για την ελληνική αγορά, άρα αυτά περιγράφουν τη διεθνή εικόνα.</caption>
+      </table>
+    </div>
+    <p>Το απλό μήνυμα είναι αυτό: το να πουλάς subscription δεν είναι "λεφτά χωρίς δουλειά". Οι πελάτες φεύγουν σταθερά, άρα η επιχείρηση πρέπει να συνεχίζει να παράγει περιεχόμενο και, πάνω απ' όλα, να χρησιμοποιεί group challenges και community για να κρατά τον κόσμο ενεργό. Αυτά τα δύο κάνουν τη διαφορά ανάμεσα σε μια subscription που αδειάζει σιγά σιγά και σε μία που μεγαλώνει.</p>
+  </section>
+
+  <!-- ============ OPPORTUNITY ============ -->
+  <section id="opportunity">
+    <h2><span class="n">5</span>Πού βρίσκεται η ευκαιρία</h2>
+    <p class="lead">Αυτή είναι η μία ενότητα όπου δίνουμε τη δική μας άποψη. Όλα τα παραπάνω ήταν περιγραφή της αγοράς· αυτό που ακολουθεί είναι η δική μας ανάγνωση για το πού υπάρχει χώρος για ένα νέο brand.</p>
+
+    <h3>Ο χάρτης της αγοράς</h3>
+    <p>Αν τοποθετήσουμε κάθε brand σε έναν απλό χάρτη, το κενό φαίνεται εύκολα. Ο οριζόντιος άξονας μετρά πόσο ένα brand κατέχει τη δική του προσέγγιση: αριστερά είναι οι γενικές content libraries και τα μεταπωλημένα ξένα certificates· δεξιά είναι τα brands με δική τους επώνυμη μέθοδο, αναγνωρίσιμο teacher και δίκτυο coaches. Ο κάθετος άξονας μετρά γλώσσα και αγορά: πάνω είναι ελληνόφωνο και τοπικό· κάτω είναι global και αγγλόφωνο. Πέρασε το mouse πάνω από οποιαδήποτε κουκκίδα για να δεις το όνομα· η πλήρης λίστα είναι στο υπόμνημα κάτω από τον χάρτη.</p>
+    <div class="card mapcard">
+      <svg class="posmap" viewBox="0 0 760 560" role="img" aria-label="Χάρτης των brands που μελετήθηκαν">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#E0A92E" stop-opacity="0.32"/>
+            <stop offset="100%" stop-color="#E0A92E" stop-opacity="0"/>
+          </radialGradient>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L7,3 L0,6 Z" fill="#9c6b16"/>
+          </marker>
+        </defs>
+        <rect x="80" y="40" width="320" height="220" fill="#f4a3a3" opacity="0.05"/>
+        <rect x="400" y="40" width="320" height="220" fill="#E0A92E" opacity="0.10"/>
+        <rect x="80" y="260" width="320" height="220" fill="#9bb7d4" opacity="0.06"/>
+        <rect x="400" y="260" width="320" height="220" fill="#2E8B8B" opacity="0.06"/>
+        <rect x="402" y="42" width="316" height="216" fill="none" stroke="#E0A92E" stroke-width="2" stroke-dasharray="7 5" rx="6"/>
+        <circle cx="560" cy="150" r="120" fill="url(#glow)"/>
+        <circle cx="560" cy="158" r="33" fill="none" stroke="#E0A92E" stroke-width="2.5" stroke-dasharray="4 4"/>
+        <text x="560" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#9c6b16" letter-spacing="1">ΤΟ ΑΝΟΙΧΤΟ ΚΕΝΟ</text>
+        <text x="560" y="110" text-anchor="middle" font-size="10.5" fill="#9c6b16">Ελληνική γλώσσα · δική του μέθοδος · αναγνωρίσιμος teacher · coach network</text>
+        <text x="560" y="162" text-anchor="middle" font-size="11" font-weight="700" fill="#9c6b16">κανένα brand</text>
+        <text x="560" y="176" text-anchor="middle" font-size="11" font-weight="700" fill="#9c6b16">ακόμα εδώ</text>
+
+        <line x1="80" y1="260" x2="720" y2="260" stroke="#c4ccd6" stroke-width="1.5"/>
+        <line x1="400" y1="40" x2="400" y2="480" stroke="#c4ccd6" stroke-width="1.5"/>
+        <text x="90" y="34" font-size="11.5" fill="#5e7384">↑ Ελληνική γλώσσα / τοπική αγορά</text>
+        <text x="90" y="498" font-size="11.5" fill="#5e7384">↓ Global / αγγλική γλώσσα</text>
+        <text x="86" y="276" font-size="11.5" fill="#5e7384">Γενικό content ή μεταπωλημένο certificate →</text>
+        <text x="716" y="276" text-anchor="end" font-size="11.5" fill="#5e7384">→ Δική του μέθοδος + teacher + coach network</text>
+
+        <path d="M576,188 C 612,232 632,255 632,286" fill="none" stroke="#9c6b16" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)" opacity="0.85"/>
+        <text x="648" y="232" font-size="10" fill="#9c6b16" opacity="0.9">πιθανή διαδρομή:</text>
+        <text x="648" y="245" font-size="10" fill="#9c6b16" opacity="0.9">ξεκινά στα ελληνικά,</text>
+        <text x="648" y="258" font-size="10" fill="#9c6b16" opacity="0.9">μετά γίνεται global</text>
+
+        <g id="mapdots"></g>
+      </svg>
+      <div class="grpkey">
+        <span><i class="dot" style="background:#2E8B8B"></i> Διεθνή brands</span>
+        <span><i class="dot" style="background:#C97B1E"></i> Ελληνική αγορά</span>
+        <span><i class="dot" style="border:2px dashed #E0A92E;background:transparent"></i> Το ανοιχτό κενό</span>
+      </div>
+      <div class="maplegend" id="maplegend"></div>
+    </div>
+    <div class="note info"><span class="h">Πώς διαβάζεται ο χάρτης.</span> Η κάτω δεξιά γωνία είναι γεμάτη με διεθνή brands που κατέχουν τη μέθοδό τους (ATG, Functional Patterns, Liebscher &amp; Bracht και άλλα). Η πάνω αριστερή γωνία είναι γεμάτη με Έλληνες παίκτες που πουλούν γενικό content ή μεταπωλούν ξένα certificates. Η πάνω δεξιά γωνία — ένα ελληνόφωνο brand με δική του μέθοδο, αναγνωρίσιμο teacher και coach network — είναι άδεια. Το μόνο που βρίσκεται κοντά της είναι το Sitaras Method, και αυτό βασίζεται στη Νέα Υόρκη, έχει τιμές ΗΠΑ, πουλιέται σε studio, χωρίς app και χωρίς coach network. Άρα η γωνία είναι, στην πράξη, ανοιχτή.</div>
+
+    <h3>Πόσο μεγάλο μπορεί να είναι το κοινό</h3>
+    <p>Ένα ελληνόφωνο προϊόν δεν περιορίζεται στα δέκα εκατομμύρια ανθρώπων στην Ελλάδα. Υπάρχουν περίπου <b>πέντε εκατομμύρια ακόμη άνθρωποι ελληνικής καταγωγής που ζουν στο εξωτερικό</b> (οι εκτιμήσεις κυμαίνονται από τρία έως επτά εκατομμύρια, ανάλογα με τον τρόπο μέτρησης), οι περισσότεροι στις Ηνωμένες Πολιτείες, την Αυστραλία και τη Γερμανία — όλες πλούσιες χώρες.<sup><a href="#s3">[3]</a></sup> Αυτές οι κοινότητες εξακολουθούν να νιώθουν ισχυρή σύνδεση με την ελληνική γλώσσα και κουλτούρα, κάτι που τις κάνει πιο εύκολες να τις προσεγγίσεις και πιο γρήγορες να εμπιστευτούν από ένα κρύο αγγλόφωνο κοινό. Ένα νέο brand μπορεί πρώτα να εξυπηρετήσει αυτή την παγκόσμια ελληνική κοινότητα, όπου υπάρχει σχεδόν μηδενικός ανταγωνισμός, και μετά να προσθέσει αγγλικό content για να φτάσει όλους τους υπόλοιπους. Αυτό ακριβώς είναι το μονοπάτι που ακολούθησε η Liebscher &amp; Bracht: πρώτα στα γερμανικά και μόνο αργότερα στα αγγλικά.<sup><a href="#s1">[1]</a></sup></p>
+
+    <h3>Η πιο υποσχόμενη διαδρομή</h3>
+    <p>Με βάση όσα δουλεύουν σε αυτή την αγορά, το πιο υποσχόμενο πλάνο είναι να χτιστεί η σκάλα προσφορών που περιγράφηκε νωρίτερα, με λογική σειρά:</p>
+    <ol class="steps">
+      <li><b>Ξεκίνα με ένα καθαρό program που λύνει ένα συγκεκριμένο, κοινό πρόβλημα.</b> Ο πόνος στη μέση είναι ο πιο δυνατός υποψήφιος, επειδή τόσος κόσμος ψάχνει βοήθεια γι' αυτό. Η τιμή του πρέπει να είναι πάνω από τις φθηνές γενικές βιβλιοθήκες (που είναι στα €10–15 τον μήνα), επειδή είναι συγκεκριμένο και δίνει πραγματικό αποτέλεσμα.</li>
+      <li><b>Μετέτρεψέ το σε μηνιαία subscription με community και group challenges.</b> Αυτό είναι το σταθερό εισόδημα, και το community με τα challenges είναι αυτά που κρατούν τον κόσμο να πληρώνει — ο πιο σημαντικός παράγοντας επιτυχίας σε αυτή την αγορά.</li>
+      <li><b>Κράτα έναν μικρό αριθμό πιο ακριβών θέσεων personal coaching.</b> Αυτές φέρνουν καλά χρήματα και δυνατά success stories, αλλά πρέπει να μείνουν λίγες, επειδή το personal coaching δεν μεγαλώνει χωρίς περισσότερες ώρες.</li>
+      <li><b>Αργότερα, δίδαξε και πιστοποίησε άλλους coaches, και χτίσε δίκτυο γύρω τους.</b> Μόλις η μέθοδος αποδειχθεί και η ζήτηση είναι καθαρή, αυτό είναι το βήμα που επιτρέπει στο εισόδημα να μεγαλώσει χωρίς περισσότερο χρόνο του founder — και είναι το κομμάτι που σχεδόν κανείς στην ελληνική αγορά δεν προσφέρει σήμερα.</li>
+    </ol>
+
+    <div class="card keypoint" style="margin-top:18px">
+      <span class="tag">Το κενό, σε μία πρόταση</span>
+      <p style="margin:2px 0;font-size:16px">Το ανοιχτό κενό είναι ένα <b>ελληνόφωνο brand για κίνηση, pain relief και mobility — ειδικά για ανθρώπους άνω των 40</b> — χτισμένο γύρω από τη δική του επώνυμη μέθοδο και έναν αναγνωρίσιμο coach, που ξεκινά από την παγκόσμια ελληνική κοινότητα και αργότερα επεκτείνεται στα αγγλικά. Κανένα brand δεν κατέχει αυτή τη θέση σήμερα.</p>
+    </div>
+
+    <h3>Ένα πλεονέκτημα που ήδη έχουμε</h3>
+    <p>Τα περισσότερα από τα παραπάνω brands χρειάστηκε να χτίσουν το δικό τους app και software για αρκετά χρόνια πριν μπορέσουν να μεγαλώσουν. Εμείς έχουμε ήδη έτοιμη coaching platform και app. Αυτό σημαίνει ότι η subscription, το personal coaching και το coach network μπορούν όλα να παραδοθούν σε ένα σωστό, branded app από την πρώτη ημέρα, αντί να χτιστούν από το μηδέν — κάτι που είναι πραγματικό head start σε μια αγορά όπου το app και το community είναι αυτά που κρατούν τους πελάτες να πληρώνουν.</p>
+  </section>
+
+  <!-- ============ SOURCES ============ -->
+  <section id="sources">
+    <h2><span class="n">§</span>Πηγές &amp; σημειώσεις</h2>
+    <p class="src"><b>Σχετικά με τους αριθμούς.</b> Οι τιμές και τα στοιχεία προέρχονται από τα websites των ίδιων των εταιρειών και από δημόσιες industry reports, και μπορούν να αλλάξουν με τον χρόνο. Κάποιες τιμές δεν μπορούσαν να επιβεβαιωθούν σε επίσημη σελίδα και σημειώνονται με <span class="vno">~</span>· αυτές πρέπει να αντιμετωπίζονται ως γενικός οδηγός, όχι ως ακριβές quote.</p>
+    <div class="src" style="margin-top:10px">
+      <p id="s1"><b>[1] Liebscher &amp; Bracht και η διαδρομή "ξεκίνα από την έδρα σου, μετά πήγαινε global":</b> <a href="https://www.liebscher-bracht.com/en/about-us/" target="_blank" rel="noopener">liebscher-bracht.com</a>, <a href="https://www.businessinsider.de/gruenderszene/media/liebscher-und-bracht-raoul-bracht-schmerztherapie-online-marketing-j/" target="_blank" rel="noopener">Business Insider (DE)</a>. Άλλα παραδείγματα "small language to global": <a href="https://en.wikipedia.org/wiki/Pamela_Reif" target="_blank" rel="noopener">Pamela Reif</a>, <a href="https://thereadystate.com/" target="_blank" rel="noopener">The Ready State</a>.</p>
+      <p id="s2"><b>[2] Πόσοι πελάτες παραμένουν (completion και cancellation):</b> <a href="https://www.businessofapps.com/data/health-fitness-app-benchmarks/" target="_blank" rel="noopener">Business of Apps — Health &amp; Fitness benchmarks</a>, <a href="https://retentioncheck.com/churn-benchmarks/fitness-apps" target="_blank" rel="noopener">RetentionCheck</a>, <a href="https://churnkey.co/blog/membership-churn/" target="_blank" rel="noopener">Churnkey</a>, <a href="https://bloggingx.com/online-course-completion-statistics/" target="_blank" rel="noopener">course-completion studies (MIT / Columbia / Teachable)</a>.</p>
+      <p id="s3"><b>[3] Μέγεθος της παγκόσμιας ελληνικής κοινότητας:</b> <a href="https://greekreporter.com/2024/06/04/greek-diaspora-around-the-world/" target="_blank" rel="noopener">Greek Reporter</a>, <a href="https://en.wikipedia.org/wiki/Greek_diaspora" target="_blank" rel="noopener">Wikipedia — Greek diaspora</a>, <a href="https://tornosnews.gr/en/world-news/22426-map-countries-with-most-diaspora-greeks-around-the-planet.html" target="_blank" rel="noopener">Tornos News</a>.</p>
+    </div>
+    <p class="src" style="margin-top:10px"><b>Brand websites:</b> davidgreyrehab.com · ikneurology.com · skool.com/bodybuildingnotbodybreaking · atgforcoaches.com · thereadystate.com · gowod.app · pliability.com · squatuniversity.com · functionalpatterns.com · functionalanatomyseminars.com · liebscher-bracht.com · precisionmovement.coach · tommorrison.uk · gmb.io · saturnomovement.com · animalflow.com · thecoach.gr · muscleadvantages.com · hnfc.academy · npfitness.gr.</p>
+  </section>
+
+  <footer>
+    Έρευνα αγοράς — online coaching για κίνηση, ανακούφιση από πόνο και mobility · προετοιμάστηκε 19/06/2026.<br>
+    Τα στοιχεία είναι ενδεικτικά και προέρχονται από δημόσιες πηγές· δείχνουν το γενικό επίπεδο της αγοράς και όχι ακριβή quotes.
+  </footer>
+</main>
+</div>
+</div>
+
+<script>
+const brands = [
+  // group: intl | greek ; methods: prog sub coach cert
+  {num:20, name:"David Grey Rehab", who:"David Grey", group:"intl", region:"Ιρλανδία", focus:"Recovery και programs ανά σημείο σώματος (γόνατο, ισχίο, πέλμα)", pricing:'Ένα program για ένα σημείο του σώματος κοστίζει περίπου <b>€197</b> <span class="vok">✓</span>· bundles έως ~€556· ετήσια subscription για επαγγελματίες', methods:["prog","sub"], approxMo:null, lesson:"Ο κόσμος πληρώνει περίπου €197 για ένα program που διορθώνει ένα συγκεκριμένο σημείο του σώματος, και ένας αξιόπιστος coach μπορεί να τα πουλήσει απευθείας από website χωρίς να απαντά μηνύματα ένα-ένα.", url:"https://davidgreyrehab.com", mapX:69, mapY:76},
+  {num:21, name:"Integrated Kinetic Neurology", who:"περίπου 154.000 followers", group:"intl", region:"ΗΠΑ / Ιρλανδία", focus:"Courses που πιστοποιούν άλλους επαγγελματίες", pricing:'Certification courses (level 1 → 2 → specialties)· οι τιμές δεν εμφανίζονται δημόσια <span class="vno">~</span>', methods:["cert"], approxMo:null, lesson:"Μια μέθοδος προπόνησης μπορεί να μετατραπεί σε paid courses για άλλους επαγγελματίες. Τα courses δίνουν επίσημα study credits, κάτι που κρατά τον κόσμο να πληρώνει — αλλά αυτά τα credits χρειάζονται ιατρικό ή κλινικό κύρος.", url:"https://ikneurology.com", mapX:79, mapY:51},
+  {num:22, name:"Swolesam", who:"Sam Rosin", group:"intl", region:"ΗΠΑ", focus:"Χτίσιμο μυϊκής μάζας προστατεύοντας τις αρθρώσεις", pricing:'<b>$25 τον μήνα</b> <span class="vok">✓</span> για online community (library + ένα εβδομαδιαίο live call)· free trial', methods:["sub"], approxMo:25, lesson:"Ένα απλό, αξέχαστο slogan μαζί με χαμηλή μηνιαία τιμή και free trial μπορεί να χτίσει paid membership χωρίς one-to-one πωλήσεις. Όμως δεν υπάρχει πιο ακριβή επιλογή και δεν υπάρχει coach network, άρα το εισόδημα ανά μέλος μένει χαμηλό.", url:"https://www.skool.com/bodybuildingnotbodybreaking", mapX:62, mapY:86},
+
+  {num:7, name:"ATG / Knees Over Toes", who:"Ben Patrick", group:"intl", region:"ΗΠΑ", focus:"Δυνατά γόνατα χωρίς πόνο", pricing:'Public app· συν coach program στα <b>$100 / $75 / $50</b> τον μήνα ανά level <span class="vok">✓</span>', methods:["sub","cert"], approxMo:50, lesson:"Ο ιδιοκτήτης δεν coachάρει ο ίδιος τον κόσμο. Πουλά app στο κοινό και πιστοποιεί άλλους coaches που πληρώνουν μηνιαία συνδρομή και κάνουν τη hands-on δουλειά, άρα η επιχείρηση μεγαλώνει χωρίς τις δικές του ώρες.", url:"https://atgforcoaches.com", mapX:89, mapY:62},
+  {num:8, name:"The Ready State", who:"Kelly Starrett", group:"intl", region:"ΗΠΑ", focus:"Mobility και pain routines ανά σημείο σώματος", pricing:'Περίπου <b>$14.99 / μήνα</b> <span class="vno">~</span> (~$155.88 / χρόνο), συν professional courses', methods:["sub","cert"], approxMo:15, lesson:"Μια χαμηλή μηνιαία subscription με routines οργανωμένες ανά σημείο σώματος, με professional courses από πάνω.", url:"https://thereadystate.com", mapX:60, mapY:55},
+  {num:9, name:"GOWOD", who:"—", group:"intl", region:"Γαλλία / EU", focus:"Mobility για athletes", pricing:'Περίπου <b>$10 / μήνα</b> <span class="vno">~</span>, συν συμφωνία που μοιράζει έσοδα με gyms', methods:["sub"], approxMo:10, lesson:"Το app είναι δωρεάν για τους ιδιοκτήτες gyms, που μοιράζονται τα έσοδα όταν τα μέλη τους μπαίνουν. Αυτό χρησιμοποιεί τα gyms ως sales channel αντί να φτάνει έναν-έναν τους πελάτες.", url:"https://www.gowod.app", mapX:49, mapY:60},
+  {num:10, name:"Pliability", who:"πρώην ROMWOD", group:"intl", region:"ΗΠΑ", focus:"Recovery και mobility", pricing:'Περίπου <b>$19.99 / μήνα</b> <span class="vno">~</span> (~$179.99 / χρόνο)· μία flat τιμή για όλα', methods:["sub"], approxMo:20, lesson:"Μία flat μηνιαία τιμή για πλήρη πρόσβαση δουλεύει, και φτάνει πελάτες σε πάνω από 100 χώρες.", url:"https://pliability.com", mapX:45, mapY:71},
+  {num:11, name:"Squat University", who:"Aaron Horschig", group:"intl", region:"ΗΠΑ", focus:"Εκπαίδευση για πόνο και self-diagnosis", pricing:'Περίπου <b>$29 / μήνα</b> <span class="vno">~</span> club· συν βιβλία', methods:["sub"], approxMo:27, lesson:"Πολύ μεγάλη ποσότητα δωρεάν pain-education content φέρνει τον κόσμο μέσα και μετά τον οδηγεί σε βιβλία και paid monthly club.", url:"https://squatuniversity.com", mapX:61, mapY:70},
+  {num:12, name:"Functional Patterns", who:"Naudi Aguilar", group:"intl", region:"ΗΠΑ", focus:"Corrective training με βάση τη μηχανική του σώματος", pricing:'Program 10 εβδομάδων στα <b>$157.99</b> <span class="vok">✓</span>, που οδηγεί σε coach certification', methods:["prog","cert"], approxMo:null, lesson:"Ένα σχετικά φθηνό program είναι ταυτόχρονα προϊόν για το κοινό και το υποχρεωτικό πρώτο βήμα πριν από την ακριβή coach certification, άρα ένα σετ περιεχομένου τροφοδοτεί δύο ροές εσόδων.", url:"https://functionalpatterns.com", mapX:90, mapY:73},
+  {num:13, name:"Functional Range Conditioning", who:"Dr. Andreo Spina", group:"intl", region:"ΗΠΑ / Καναδάς", focus:"Υγεία αρθρώσεων και range of motion", pricing:'Seminar <span class="vno">~</span>· μετά οι coaches πληρώνουν περίπου <b>$100 / μήνα</b> <span class="vno">~</span> για να συνεχίσουν να χρησιμοποιούν τη μέθοδο', methods:["cert"], approxMo:100, lesson:"Οι coaches πληρώνουν περίπου $100 κάθε μήνα για να κρατήσουν το δικαίωμα να χρησιμοποιούν και να διδάσκουν τη μέθοδο. Αυτό το μηνιαίο fee από coaches είναι το πιο σταθερό, υψηλού κέρδους εισόδημα σε όλο τον χώρο.", url:"https://functionalanatomyseminars.com", mapX:81, mapY:64},
+  {num:14, name:"Liebscher & Bracht ★", who:"R. Liebscher-Bracht & Dr. P. Bracht", group:"intl", region:"Γερμανία / EU", focus:"Pain relief (ζωή χωρίς πόνο)", pricing:'App στα <b>€19.95 / μήνα</b> <span class="vok">✓</span>· βιβλία· δίκτυο 3.000+ therapists. Περίπου €15M τον χρόνο, 1,5M YouTube followers', methods:["sub","cert"], approxMo:20, lesson:"Η πιο ολοκληρωμένη επιχείρηση στον χώρο, και είναι γερμανική αντί για αμερικανική — απόδειξη ότι το μοντέλο δουλεύει έξω από τον αγγλόφωνο κόσμο. Τα δωρεάν videos οδηγούν σε app, βιβλία και μεγάλο δίκτυο πιστοποιημένων therapists.", url:"https://www.liebscher-bracht.com", mapX:93, mapY:51},
+  {num:15, name:"Precision Movement", who:"Eric Wong", group:"intl", region:"Καναδάς", focus:"Mobility και πόνος, άρθρωση-άρθρωση", pricing:'Single courses ~$99· subscription ~<b>$49 / μήνα</b> <span class="vno">~</span>· φθηνό app', methods:["prog","sub"], approxMo:10, lesson:"Μια ξεχωριστή web page για κάθε είδος πόνου (γόνατο, αυχένας, ώμος) φέρνει κόσμο από online searches και τον οδηγεί σε course bundle και low-cost app.", url:"https://precisionmovement.coach", mapX:53, mapY:52},
+  {num:16, name:"Simplistic Mobility Method", who:"Tom Morrison", group:"intl", region:"UK / EU", focus:"Mobility για ανθρώπους που σηκώνουν βάρη", pricing:'<b>£69</b> <span class="vok">✓</span> πληρωμή μία φορά, μένει για πάντα (περίπου €80), συν community', methods:["prog"], approxMo:null, lesson:"Ένα μόνο, καλά ονομασμένο program πουλιέται μία φορά κάτω από €100 και μπορεί να στηρίξει ολόκληρη επιχείρηση, με βοήθεια από δωρεάν online following και community για υποστήριξη.", url:"https://tommorrison.uk", mapX:43, mapY:83},
+  {num:17, name:"GMB Fitness", who:"Gold Medal Bodies", group:"intl", region:"ΗΠΑ", focus:"Gymnastics-style functional movement", pricing:'Programs από περίπου $150· το καθένα μπορεί να αγοραστεί μία φορά ή ως subscription', methods:["prog","sub"], approxMo:null, lesson:"Το ίδιο program προσφέρεται και ως one-time purchase και ως subscription, άρα το ίδιο content κερδίζει χρήματα με δύο τρόπους.", url:"https://gmb.io", mapX:57, mapY:82},
+  {num:18, name:"Saturno Movement", who:"—", group:"intl", region:"EU", focus:"Calisthenics, mobility και breathing", pricing:'<b>$37 / μήνα</b> <span class="vok">✓</span> ή $329 / χρόνο· δικό του app· community 20.000+', methods:["sub"], approxMo:37, lesson:"Μία flat μηνιαία τιμή για library μαθημάτων, παραδομένη μέσα στο δικό του app με μεγάλο community — και είναι ευρωπαϊκό, όχι αμερικανικό.", url:"https://saturnomovement.com", mapX:47, mapY:65},
+  {num:19, name:"Animal Flow", who:"Mike Fitch", group:"intl", region:"ΗΠΑ", focus:"Ground-based movement", pricing:'Level 1 workshop περίπου <b>$695</b> <span class="vno">~</span> συν exam περίπου $50', methods:["cert"], approxMo:null, lesson:"Μια μέθοδος movement που πουλιέται κυρίως μέσω paid instructor certifications και workshops, με directory πιστοποιημένων instructors. Κερδίζει από course fees, όχι από ποσοστό των μελλοντικών εσόδων των instructors.", url:"https://animalflow.com", mapX:73, mapY:67},
+
+  {num:1, name:"The Coach", who:"thecoach.gr", group:"greek", region:"Ελλάδα", focus:"Μεγάλη γενική home-fitness video library", pricing:'<b>€9.99–15 / μήνα</b> <span class="vok">✓</span> (ένα έτος €119.88· τρεις μήνες €44.99)', methods:["sub"], approxMo:9.99, lesson:"Οι Έλληνες πληρώνουν για μηνιαία fitness subscription, αλλά μόνο περίπου €10–15 τον μήνα για μια γενική video library. Αν ανταγωνίζεσαι ως γενική βιβλιοθήκη, ανταγωνίζεσαι στην τιμή.", url:"https://thecoach.gr", mapX:16, mapY:14},
+  {num:2, name:"Greek coach marketplaces", who:"instateacher, daskaloi, etc.", group:"greek", region:"Ελλάδα", focus:"Συνηθισμένο one-to-one coaching, πωλείται με την ώρα", pricing:'<b>€9–25 την ώρα</b> (mobility από €6 την ώρα)', methods:["coach"], approxMo:null, lesson:"Το συνηθισμένο coaching στην Ελλάδα πουλιέται με την ώρα, χωρίς brand και χωρίς κάτι που να κρατά τους πελάτες να επιστρέφουν. Ο ανταγωνισμός στην ωριαία τιμή είναι race to the bottom — αλλά αυτά τα sites είναι και μια δεξαμενή από την οποία θα μπορούσαν να στρατολογηθούν coaches.", url:"https://www.instateacher.gr/idiaitera-mathimata/athlitismos/mobility-training", mapX:10, mapY:28},
+  {num:3, name:"HNFC Academy", who:"μεταπωλεί NASM / AFAA", group:"greek", region:"Ελλάδα", focus:"Fitness certifications, μαζί με corrective work", pricing:'Certifications <b>€390–890</b> <span class="vno">~</span>· οι τιμές δεν εμφανίζονται στο website', methods:["cert"], approxMo:null, lesson:"Οι Έλληνες πληρώνουν €390–890 για fitness certification, αλλά οι επιλογές που υπάρχουν είναι γενικές και φέρουν ξένο brand. Καμία δεν είναι χτισμένη γύρω από τη δική του μέθοδο ενός Έλληνα coach, και καμία δεν πληρώνει στον coach ποσοστό όταν οι απόφοιτοι δουλέψουν αργότερα.", url:"https://hnfc.academy", mapX:32, mapY:12},
+  {num:4, name:"Muscle Advantages", who:"online coaching (Ελλάδα)", group:"greek", region:"Ελλάδα", focus:"Personal online coaching για σχήμα σώματος", pricing:'Online personal training <b>€120 / μήνα</b> <span class="vok">✓</span> (ήταν €180)· guidance plan €60 / μήνα <span class="vok">✓</span>', methods:["coach"], approxMo:60, lesson:"Το personal online coaching στην Ελλάδα πουλιέται περίπου €60–120 τον μήνα, παραδίδεται μέσω messaging apps όπως Viber και Instagram, με περιορισμένες θέσεις και χωρίς dedicated app από πίσω.", url:"https://muscleadvantages.com", mapX:25, mapY:33},
+  {num:5, name:"NP Fitness", who:"Ελλάδα + Έλληνες εξωτερικού", group:"greek", region:"Ελλάδα", focus:"Personal coaching και διατροφή, στα ελληνικά και αγγλικά", pricing:'Μηνιαία plans· οι τιμές δεν εμφανίζονται <span class="vno">~</span> (διεθνείς τιμές ~€150–300 / μήνα)', methods:["coach"], approxMo:null, lesson:"Ένα ελληνικό coaching brand που τρέχει και ελληνικές και αγγλικές σελίδες για να φτάσει Έλληνες του εξωτερικού — κάτι που δείχνει ότι η πώληση στην ελληνική κοινότητα του εξωτερικού, σε υψηλότερες τιμές, ήδη γίνεται.", url:"https://npfitness.gr", mapX:40, mapY:23},
+  {num:6, name:"Sitaras Method", who:"John Sitaras", group:"greek", region:"ελληνικής καταγωγής / ΗΠΑ", focus:"Επώνυμη, assessment-based μέθοδος (υψηλότερη τιμή)", pricing:'Υψηλότερη τιμή (studio στη Νέα Υόρκη· οι τιμές δεν δημοσιεύονται <span class="vno">~</span>)', methods:["coach"], approxMo:null, lesson:"Ένας coach ελληνικής καταγωγής έχτισε μια σεβαστή, πιο ακριβή επιχείρηση γύρω από τη δική του επώνυμη μέθοδο. Δείχνει ότι μια επώνυμη μέθοδος μπορεί να κρατήσει την αξία της — αλλά είναι studio-based, με τιμές ΗΠΑ, και δεν έχει app ή coach network.", url:"https://en.wikipedia.org/wiki/John_Sitaras", mapX:66, mapY:52},
+];
+
+const groupColors={intl:"#2E8B8B",greek:"#C97B1E"};
+const methodNames={prog:"Programs",sub:"Subscription",coach:"Coaching",cert:"Certification"};
+const body=document.getElementById('brandbody');
+let state={group:"all",methods:new Set(),q:"",sortKey:null,sortDir:1};
+
+function methodPills(ms){const map={prog:"c1",sub:"c2",coach:"c3",cert:"c4"};
+  return ms.map(m=>`<span class="pill ${map[m]}" title="${methodNames[m]}">${methodNames[m]}</span>`).join(' ');}
+
+function render(){
+  let rows=brands.filter(b=>{
+    if(state.group!=="all"&&b.group!==state.group)return false;
+    if(state.methods.size&&![...state.methods].some(m=>b.methods.includes(m)))return false;
+    if(state.q){const hay=(b.name+b.who+b.focus+b.lesson+b.region).toLowerCase();if(!hay.includes(state.q))return false;}
+    return true;
+  });
+  if(state.sortKey){
+    rows.sort((a,b)=>{
+      let x=a[state.sortKey],y=b[state.sortKey];
+      if(state.sortKey==='approxMo'){if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return -1;return (x-y)*state.sortDir;}
+      return (''+x).localeCompare(''+y)*state.sortDir;
+    });
+  } else { rows.sort((a,b)=>a.num-b.num); }
+  body.innerHTML=rows.map(b=>`
+    <tr>
+      <td><span class="bn"><a href="${b.url}" target="_blank" rel="noopener">${b.name}</a></span><span class="who">${b.who}</span></td>
+      <td><span class="reg">${b.region}</span></td>
+      <td>${b.focus}</td>
+      <td class="price">${b.pricing}</td>
+      <td class="nowrap">${methodPills(b.methods)}</td>
+      <td class="nowrap">${b.approxMo==null?'<span style="color:var(--muted)">—</span>':'€'+b.approxMo}</td>
+      <td>${b.lesson}</td>
+    </tr>`).join('');
+  document.getElementById('brandcount').textContent=`Εμφάνιση ${rows.length} από ${brands.length} brands`;
+}
+
+document.getElementById('grpseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  state.group=b.dataset.g;[...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));render();});
+document.getElementById('mchips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  const m=b.dataset.m;if(state.methods.has(m)){state.methods.delete(m);b.classList.remove('on');}else{state.methods.add(m);b.classList.add('on');}render();});
+document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.toLowerCase().trim();render();});
+document.querySelectorAll('#brandtable th.sortable').forEach(th=>{th.addEventListener('click',()=>{
+  const k=th.dataset.k;if(state.sortKey===k){state.sortDir*=-1;}else{state.sortKey=k;state.sortDir=1;}
+  document.querySelectorAll('#brandtable th.sortable').forEach(x=>x.classList.remove('sortasc','sortdesc'));
+  th.classList.add(state.sortDir===1?'sortasc':'sortdesc');render();});});
+render();
+
+// ---- positioning map ----
+const PX={x0:80,x1:720,y0:40,y1:480};
+function mp(b){return{x:PX.x0+(b.mapX/100)*(PX.x1-PX.x0),y:PX.y0+(b.mapY/100)*(PX.y1-PX.y0)};}
+document.getElementById('mapdots').innerHTML=brands.map(b=>{
+  const p=mp(b),col=groupColors[b.group];
+  return `<g class="pt"><title>${b.num}. ${b.name}</title>
+    <circle cx="${p.x.toFixed(0)}" cy="${p.y.toFixed(0)}" r="11" fill="${col}" stroke="#fff" stroke-width="1.5"/>
+    <text x="${p.x.toFixed(0)}" y="${(p.y+3.6).toFixed(0)}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${b.num}</text></g>`;
+}).join('');
+document.getElementById('maplegend').innerHTML=[...brands].sort((a,b)=>a.num-b.num).map(b=>`
+  <div class="li"><span class="bb" style="background:${groupColors[b.group]}">${b.num}</span><span class="nm">${b.name}</span></div>`).join('');
+
+// ---- theme toggle ----
+const tb=document.getElementById('themeBtn');
+tb.addEventListener('click',()=>{document.body.classList.toggle('dark');
+  tb.textContent=document.body.classList.contains('dark')?'☀ Φωτεινό':'🌙 Σκούρο';});
+
+// ---- scrollspy ----
+const links=[...document.querySelectorAll('nav.toc a')];
+const linkMap=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+const spy=new IntersectionObserver((es)=>{es.forEach(en=>{if(en.isIntersecting){
+  links.forEach(l=>l.classList.remove('active'));
+  const a=linkMap.get(en.target.id);if(a)a.classList.add('active');
+}});},{rootMargin:"-20% 0px -70% 0px"});
+document.querySelectorAll('main section').forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Research — Online Coaching for Movement, Pain Relief and Mobility</title>
+<style>
+  :root{
+    --navy:#1F3A5F; --navy-2:#2E5E8C; --teal:#2E8B8B; --teal-deep:#1f6b6b;
+    --amber:#C97B1E; --amber-soft:#f0e0c8; --gold:#E0A92E;
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1d2530; --muted:#5e7384; --line:#e2e7ee;
+    --m1:#2E5E8C; --m2:#2E8B8B; --m3:#7a4fa3; --m4:#C97B1E;
+    --shadow:0 1px 3px rgba(20,40,70,.08),0 6px 22px rgba(20,40,70,.07);
+    --radius:14px;
+  }
+  body.dark{
+    --navy:#bfd2e6; --navy-2:#9cc0e0; --teal:#5bc4c4;
+    --bg:#0f161e; --card:#18222e; --ink:#e7edf4; --muted:#9fb0c0; --line:#27333f;
+    --amber-soft:#3a3020;
+    --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 22px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;font-size:15.5px;-webkit-font-smoothing:antialiased}
+  a{color:var(--teal);text-decoration:none}
+  a:hover{text-decoration:underline}
+  sup a{font-size:10px;font-weight:700;padding:0 1px}
+
+  .topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;display:flex;
+    align-items:center;gap:14px;padding:10px 22px;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+  body.dark .topbar{background:#0b1119;border-bottom:1px solid var(--line)}
+  .topbar .brand{font-weight:700;letter-spacing:.3px;font-size:15px}
+  .topbar .brand span{opacity:.7;font-weight:400}
+  .topbar .spacer{flex:1}
+  .topbar button{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.22);
+    padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px}
+  .topbar button:hover{background:rgba(255,255,255,.22)}
+
+  .wrap{max-width:1460px;margin:0 auto;padding:0 22px}
+  .layout{display:grid;grid-template-columns:250px 1fr;gap:34px;align-items:start}
+  nav.toc{position:sticky;top:74px;font-size:13.5px;padding:18px 0;max-height:calc(100vh - 90px);overflow:auto}
+  nav.toc h4{margin:0 0 8px;text-transform:uppercase;letter-spacing:.9px;font-size:11px;color:var(--muted)}
+  nav.toc a{display:block;color:var(--muted);padding:5px 10px;border-left:2px solid transparent;border-radius:0 6px 6px 0}
+  nav.toc a:hover{color:var(--ink);background:var(--card);text-decoration:none}
+  nav.toc a.active{color:var(--navy);border-left-color:var(--teal);background:var(--card);font-weight:600}
+  main{padding:22px 0 80px;min-width:0}
+
+  .hero{background:linear-gradient(135deg,var(--navy),#15466e 60%,var(--teal-deep));color:#fff;border-radius:18px;
+    padding:34px 36px;margin:18px 0 30px;box-shadow:var(--shadow)}
+  .hero .kicker{text-transform:uppercase;letter-spacing:2px;font-size:11.5px;opacity:.8}
+  .hero h1{margin:8px 0 8px;font-size:29px;line-height:1.18;font-weight:750}
+  .hero p.sub{margin:0;opacity:.92;font-size:16px;max-width:790px}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;font-size:12.5px}
+  .hero .meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:5px 11px;border-radius:20px}
+
+  section{margin:0 0 16px;scroll-margin-top:72px}
+  h2{font-size:23px;color:var(--navy);margin:34px 0 8px;font-weight:740;display:flex;align-items:center;gap:10px}
+  h2 .n{font-size:13px;background:var(--teal);color:#fff;min-width:26px;height:26px;border-radius:7px;display:inline-flex;
+    align-items:center;justify-content:center;font-weight:700;flex:none;padding:0 4px}
+  h3{font-size:17px;color:var(--navy-2);margin:24px 0 8px;font-weight:680}
+  .lead{color:var(--muted);font-size:15px;margin:2px 0 14px;max-width:880px}
+  p{margin:11px 0;max-width:900px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  @media(max-width:860px){.g2{grid-template-columns:1fr}}
+
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap}
+  .c1{background:rgba(46,94,140,.14);color:var(--m1)}
+  .c2{background:rgba(46,139,139,.16);color:var(--teal-deep)}
+  .c3{background:rgba(122,79,163,.15);color:var(--m3)}
+  .c4{background:rgba(201,123,30,.16);color:var(--m4)}
+  body.dark .c1{background:rgba(120,170,220,.2);color:#9cc0e0}
+  body.dark .c2{background:rgba(91,196,196,.2);color:#7fd6d6}
+  body.dark .c3{background:rgba(170,130,210,.22);color:#c6a8e0}
+  body.dark .c4{background:rgba(220,160,80,.22);color:#e7c98c}
+  .reg{font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);background:var(--card)}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  #brandtable{table-layout:fixed;min-width:760px}
+  #brandtable th,#brandtable td{overflow-wrap:break-word;word-break:normal}
+  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--navy);color:#fff;position:sticky;top:0;font-weight:600;font-size:12.5px}
+  th.sortable{cursor:pointer;user-select:none}
+  th.sortable:hover{background:var(--navy-2)}
+  th.sortable::after{content:"⇅";opacity:.4;margin-left:5px;font-size:11px}
+  th.sortasc::after{content:"↑";opacity:1}
+  th.sortdesc::after{content:"↓";opacity:1}
+  tbody tr:hover{background:rgba(46,139,139,.05)}
+  td .bn{font-weight:700;color:var(--navy);font-size:13.8px}
+  td .who{color:var(--muted);font-size:11.5px;display:block;margin-top:2px}
+  .price b{color:var(--ink)}
+  .vok{color:var(--teal-deep);font-weight:700} .vno{color:var(--muted)}
+  .nowrap{white-space:nowrap}
+  caption{caption-side:bottom;text-align:left;color:var(--muted);font-size:12px;padding:10px 4px;line-height:1.55}
+
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 12px}
+  .controls input[type=search]{flex:1;min-width:180px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;
+    background:var(--card);color:var(--ink);font-size:14px}
+  .seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--card);flex-wrap:wrap}
+  .seg button{border:0;background:transparent;color:var(--muted);padding:8px 13px;cursor:pointer;font-size:13px;font-weight:600}
+  .seg button.on{background:var(--navy);color:#fff}
+  .chipset{display:flex;gap:7px;flex-wrap:wrap}
+  .chipset button{border:1px solid var(--line);background:var(--card);color:var(--muted);padding:7px 12px;border-radius:20px;
+    cursor:pointer;font-size:12.5px;font-weight:600}
+  .chipset button.on{border-color:transparent;color:#fff}
+  .chipset button.on[data-m="prog"]{background:var(--m1)}
+  .chipset button.on[data-m="sub"]{background:var(--teal)}
+  .chipset button.on[data-m="coach"]{background:var(--m3)}
+  .chipset button.on[data-m="cert"]{background:var(--m4)}
+  .count{color:var(--muted);font-size:12.5px;margin-left:auto}
+  .methodleg{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin:0 0 12px}
+
+  .mapcard{padding:14px}
+  svg.posmap{width:100%;height:auto;display:block}
+  svg.posmap g.pt{cursor:default}
+  .maplegend{display:grid;grid-template-columns:repeat(2,1fr);gap:3px 22px;margin-top:12px;font-size:12.3px}
+  @media(max-width:680px){.maplegend{grid-template-columns:1fr}}
+  .maplegend .li{display:flex;gap:8px;align-items:baseline;padding:2px 0}
+  .maplegend .bb{flex:none;width:19px;height:19px;border-radius:50%;color:#fff;font-size:11px;font-weight:700;
+    display:inline-flex;align-items:center;justify-content:center}
+  .maplegend .nm{color:var(--ink)}
+  .grpkey{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:10px;font-size:12.5px;color:var(--muted)}
+  .grpkey span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+
+  .note{border-radius:10px;padding:13px 16px;font-size:14px;margin:14px 0}
+  .note.info{background:rgba(46,94,140,.08);border:1px solid rgba(46,94,140,.25)}
+  .note .h{font-weight:700;display:block;margin-bottom:3px}
+
+  ol.steps{counter-reset:p;list-style:none;padding:0;margin:12px 0}
+  ol.steps li{position:relative;padding:12px 0 12px 44px;border-bottom:1px solid var(--line)}
+  ol.steps li:last-child{border-bottom:0}
+  ol.steps li::before{counter-increment:p;content:counter(p);position:absolute;left:0;top:11px;width:28px;height:28px;
+    background:var(--navy);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+  ol.steps li b{color:var(--navy)}
+
+  .keypoint{border-left:5px solid var(--teal);background:linear-gradient(90deg,rgba(46,139,139,.08),transparent 60%)}
+  .keypoint .tag{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;
+    letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:6px;margin-bottom:8px}
+  .keypoint b{color:var(--navy)}
+
+  footer{color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);margin-top:40px;padding:22px 0}
+  .src{font-size:12.5px;color:var(--muted);word-break:break-word;line-height:1.8}
+
+  @media(max-width:920px){.layout{grid-template-columns:1fr}nav.toc{display:none}}
+  @media print{
+    .topbar,nav.toc,.controls{display:none!important}
+    .layout{grid-template-columns:1fr}
+    body{background:#fff;font-size:11px}
+    .hero{background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .card,.tablewrap{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">Market Research · <span>Online movement &amp; pain-relief coaching</span></div>
+  <div class="spacer"></div>
+  <button onclick="window.print()">🖨 Print / PDF</button>
+  <button id="themeBtn">🌙 Dark</button>
+</div>
+
+<div class="wrap">
+<div class="layout">
+
+<nav class="toc">
+  <h4>Contents</h4>
+  <a href="#intro">What this report covers</a>
+  <a href="#players">1 · Who is succeeding</a>
+  <a href="#money">2 · How they make money</a>
+  <a href="#patterns">3 · What makes them succeed</a>
+  <a href="#staying">4 · How many customers stay</a>
+  <a href="#opportunity">5 · Where the opportunity is</a>
+  <a href="#sources">Sources &amp; notes</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="kicker">Market research</div>
+    <h1>Online coaching for movement, pain relief and mobility: who is succeeding, how they earn, and where there is room for a new brand</h1>
+    <p class="sub">A look at the businesses worldwide and in Greece that help people move better and get out of pain. The report describes what these businesses do and how they make money. The final section is the only place where we give our own view on where the best opportunity lies.</p>
+    <div class="meta">
+      <span>📅 19/06/2026</span>
+      <span>🔎 About 22 brands studied</span>
+      <span>🔗 Sources linked throughout</span>
+    </div>
+  </div>
+
+  <!-- ============ INTRO ============ -->
+  <section id="intro">
+    <h2><span class="n">i</span>What this report covers</h2>
+    <p>This report looks at businesses around the world that help people move better, get out of pain, and improve their mobility — for example easing a sore lower back, stiff hips, or painful knees, and helping people keep moving well as they get older. These businesses are almost always built around one coach or one named training method, and they sell their help online.</p>
+    <p>We studied about twenty of them: the best-known international names, and the main players in the Greek market. For each one we looked at four simple things — what they sell, how much they charge, how they make their money, and what seems to make them work.</p>
+    <p>The first four sections simply describe what we found, with no opinions. <b>The final section is the only place where we give our own view</b>: based on the competition and the empty spaces we see, where there is room for a new brand.</p>
+  </section>
+
+  <!-- ============ PLAYERS ============ -->
+  <section id="players">
+    <h2><span class="n">1</span>Who is succeeding</h2>
+    <p>The field is led by a small number of well-known coaches and methods. Most of them are based in the United States and work in English, and a few have grown into large companies.</p>
+    <p>The clearest example of a complete business is <b><a href="https://www.liebscher-bracht.com/en/" target="_blank" rel="noopener">Liebscher &amp; Bracht</a></b> in Germany. They give away a large library of short pain-relief videos on YouTube, which brought them more than 1.5 million followers. That free audience then buys a paid app, books printed in about ten languages, and treatments from a network of more than 3,000 certified therapists. The company is reported to earn around €15 million a year.<sup><a href="#s1">[1]</a></sup> It matters because it is German, not American — it shows this kind of business can succeed outside the English-speaking world.</p>
+    <p>Other strong international names work in similar ways. <b><a href="https://atgforcoaches.com" target="_blank" rel="noopener">ATG / Knees Over Toes</a></b> sells an app to the public and certifies other coaches who pay a monthly fee and do the hands-on coaching, so the founder does not coach people himself. <b><a href="https://thereadystate.com" target="_blank" rel="noopener">The Ready State</a></b> sells a low monthly subscription with mobility and pain routines organised by body part. <b><a href="https://functionalpatterns.com" target="_blank" rel="noopener">Functional Patterns</a></b> uses a fairly cheap program as the entry point to an expensive coach certification. Three accounts that are often pointed to as comparable — <b><a href="https://davidgreyrehab.com" target="_blank" rel="noopener">David Grey Rehab</a></b>, <b><a href="https://ikneurology.com" target="_blank" rel="noopener">Integrated Kinetic Neurology</a></b>, and <b><a href="https://www.skool.com/bodybuildingnotbodybreaking" target="_blank" rel="noopener">Swolesam</a></b> — each do well, but each one only uses a single way of earning and leaves the others untouched.</p>
+    <p>The Greek market looks very different. The coaches with the largest followings focus on general fitness and body shape, not on pain or corrective work. Personal coaching is sold mostly through messaging apps such as Viber and Instagram, with no dedicated app behind it. The fitness certifications on offer carry foreign brands and are simply resold in Greek. In other words, Greece has the customers and the demand, but no recognised home-grown brand built around pain relief, mobility, and a coach's own method.</p>
+
+    <h3>Every brand we studied</h3>
+    <p class="lead">You can search the table, filter it by how each brand earns, or sort it by its lowest monthly price. Each name links to the company's website.</p>
+    <div class="methodleg">
+      <span><span class="pill c1">Programs</span> sold once, kept forever</span>
+      <span><span class="pill c2">Subscription</span> paid every month</span>
+      <span><span class="pill c3">Coaching</span> one person at a time</span>
+      <span><span class="pill c4">Certification</span> teaching/certifying other coaches</span>
+    </div>
+    <div class="controls">
+      <input type="search" id="q" placeholder="Search by name, type, or note…">
+      <div class="seg" id="grpseg">
+        <button data-g="all" class="on">All</button>
+        <button data-g="intl">International</button>
+        <button data-g="greek">Greek market</button>
+      </div>
+      <div class="chipset" id="mchips">
+        <button data-m="prog">Programs</button>
+        <button data-m="sub">Subscription</button>
+        <button data-m="coach">Coaching</button>
+        <button data-m="cert">Certification</button>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table id="brandtable">
+        <colgroup>
+          <col style="width:11%"><col style="width:6%"><col style="width:12%"><col style="width:16%">
+          <col style="width:9%"><col style="width:6%"><col style="width:40%">
+        </colgroup>
+        <thead><tr>
+          <th class="sortable" data-k="name">Brand</th>
+          <th>Country</th>
+          <th>What they focus on</th>
+          <th>What they sell &amp; the price</th>
+          <th>How they earn</th>
+          <th class="sortable" data-k="approxMo">Lowest €/mo</th>
+          <th>What this shows about the market</th>
+        </tr></thead>
+        <tbody id="brandbody"></tbody>
+      </table>
+    </div>
+    <div class="count" id="brandcount" style="margin-top:8px"></div>
+    <p class="src" style="margin-top:6px">"Lowest €/mo" is the cheapest monthly price each brand offers, shown in euro so the brands can be compared (US dollars are treated as roughly equal to euro here). Brands that only sell one-time products show "—". A <span class="vok">✓</span> means we confirmed the price on the company's own website; a <span class="vno">~</span> means it comes from other sources and may not be exact.</p>
+  </section>
+
+  <!-- ============ MONEY ============ -->
+  <section id="money">
+    <h2><span class="n">2</span>How they make money</h2>
+    <p>There are a few main ways these businesses earn. None of them is new, and the most successful businesses use several of them together rather than relying on just one. Here is each way, in plain terms.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Way of earning</th><th>What it is</th><th>Strong point</th><th>Weak point</th><th>Typical price</th></tr></thead>
+        <tbody>
+          <tr><td><b>Ready-made programs</b> (paid once)</td><td>A fixed program of videos and a plan, bought one time and kept forever. The customer follows it on their own.</td><td>Cheap to run once it is made, and the quickest way to start earning.</td><td>The money does not repeat — you must keep finding new buyers. Many people never finish a program they follow alone.</td><td class="price">€40–200 (up to €300–500 for a flagship)</td></tr>
+          <tr style="background:rgba(46,139,139,.07)"><td><b>Monthly subscription</b> (app or library)</td><td>Members pay every month for an app or video library that keeps getting new content.</td><td>Steady, repeating income that grows well with little personal time. About three-quarters of all fitness-app income now comes from subscriptions.</td><td>Members drift away over time, so you must keep them interested with fresh content and a community.</td><td class="price">€10–20 per month (about €120–240 per year)</td></tr>
+          <tr><td><b>Personal online coaching</b> (one person at a time)</td><td>A private, made-to-measure plan with regular check-ins, usually through an app or messages.</td><td>The highest price per customer, and the best results, because it is personal.</td><td>It does not grow — the income is limited by the coach's own hours. Best kept as a small, higher-priced option.</td><td class="price">€150–500+ per month (about €60–120 in Greece today)</td></tr>
+          <tr style="background:rgba(201,123,30,.07)"><td><b>Certifying other trainers</b></td><td>Other trainers pay to learn the method, earn a certificate, and are listed in a directory.</td><td>Sells to professionals, who pay more than the public; turns a personal method into a recognised standard; grows well beyond the founder's hours.</td><td>The method must be proven and easy to teach first, and there must already be public demand for it.</td><td class="price">€500–2,000 per level</td></tr>
+          <tr style="background:rgba(201,123,30,.07)"><td><b>A network of certified coaches</b></td><td>Certified coaches deliver the method under the brand, and the founder receives a share of what they earn, or a yearly licence fee.</td><td>Income grows with the whole network, not just the founder. The most scalable way of all.</td><td>The hardest to build and manage; it needs a large group of coaches and clear agreements first.</td><td class="price">Yearly licence €100–500, or a share of the coaches' income</td></tr>
+          <tr><td><b>Live seminars and workshops</b></td><td>In-person or live online events that teach the method, usually at a high price.</td><td>High price per event, strong trust and word of mouth; often the first step toward certification.</td><td>The founder has to be present, so it does not grow on its own; travel and venue cost money.</td><td class="price">€200–800 per person per day</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The pattern among the most successful businesses is clear: they combine these ways into one ladder. They start people with free content, move them to a low-cost program, then to a monthly subscription, and finally offer higher-priced personal coaching and, later, a coach certification. The cheap products bring people in; the subscription gives steady income; and the certification and coach network are what let the business grow without using more of the founder's own time.</p>
+  </section>
+
+  <!-- ============ PATTERNS ============ -->
+  <section id="patterns">
+    <h2><span class="n">3</span>What makes them succeed</h2>
+    <p>Looking across all the successful brands, the same habits come up again and again. These are not opinions; they are the things the winners actually do.</p>
+    <ol class="steps">
+      <li><b>They lead with a clear promise of a result.</b> They sell "get rid of your back pain" or "move well again," and they keep the name of their method in the background as the engine behind that promise, rather than as the headline.</li>
+      <li><b>They give away a lot of free teaching content.</b> On YouTube and Instagram they explain why the body hurts and how it works. This free content both attracts customers and lets people see what the paid product is like before they buy.</li>
+      <li><b>They let people buy directly from a website.</b> Customers can pay and start on their own, without sending messages back and forth. This keeps the coach's time free and still makes the sale.</li>
+      <li><b>They make a separate page for each problem.</b> A page for back pain, another for knees, another for the neck. When someone searches online for that exact problem, they find the brand.</li>
+      <li><b>They turn programs into group challenges.</b> Far more people finish a program when they do it together as a timed group than when they do it alone — and people who finish get results, leave good reviews, and stay longer.</li>
+      <li><b>They let other coaches do the hands-on work.</b> The founder owns the method and the brand, while certified coaches deliver the coaching. This is how the business grows without the founder working more hours.</li>
+      <li><b>They use one cheap product to feed two income streams.</b> The same low-cost program that the public buys is also the first step a coach must complete before getting certified, so one piece of content does two jobs.</li>
+    </ol>
+  </section>
+
+  <!-- ============ STAYING ============ -->
+  <section id="staying">
+    <h2><span class="n">4</span>How many customers stay</h2>
+    <p>A monthly subscription only works if people keep paying month after month, and keeping them is the hardest part of the whole business. It is also the reason group challenges and communities matter so much. The figures below come from several independent industry sources and describe the field as a whole.<sup><a href="#s2">[2]</a></sup></p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>What we are measuring</th><th>What the data shows</th></tr></thead>
+        <tbody>
+          <tr><td>People who finish a program they follow on their own</td><td>Only about <b>15–40%</b> finish. For free programs it is often under 15%.</td></tr>
+          <tr style="background:rgba(46,139,139,.07)"><td>People who finish a group challenge or a course with a community</td><td>About <b>70–90%</b> finish — far more than those who go it alone.</td></tr>
+          <tr><td>Members who cancel a fitness app each month</td><td>About <b>9 out of 100</b> on average. The best-run apps keep this near <b>2 out of 100</b>.</td></tr>
+          <tr><td>Yearly plans versus paying month to month</td><td>People on a yearly plan stay <b>40–60% longer</b> than people who pay each month.</td></tr>
+          <tr style="background:rgba(46,139,139,.07)"><td>Effect of having a community</td><td>Monthly cancellations drop from about <b>9% to about 6%</b> when there is a community.</td></tr>
+          <tr><td>Where the money in fitness apps comes from</td><td>About <b>three-quarters</b> of all fitness-app income is from subscriptions.</td></tr>
+        </tbody>
+        <caption>Sources: industry benchmark reports and studies on online-course completion.<sup><a href="#s2">[2]</a></sup> No reliable figures exist for the Greek market specifically, so these describe the international picture.</caption>
+      </table>
+    </div>
+    <p>The simple message is this: selling a subscription is not "money for nothing." Customers leave steadily, so the business must keep producing content and, above all, must use group challenges and a community to keep people active. Those two things are the difference between a subscription that slowly empties and one that grows.</p>
+  </section>
+
+  <!-- ============ OPPORTUNITY ============ -->
+  <section id="opportunity">
+    <h2><span class="n">5</span>Where the opportunity is</h2>
+    <p class="lead">This is the one section where we give our own view. Everything above was a description of the market; what follows is our reading of where there is room for a new brand.</p>
+
+    <h3>The map of the market</h3>
+    <p>If we place every brand on a simple map, the gap becomes easy to see. The left-to-right line measures how much a brand owns its own approach: on the left are general content libraries and resold foreign certificates; on the right are brands with their own named method, a recognisable teacher, and a network of coaches. The up-and-down line measures language and market: at the top is Greek-language and local; at the bottom is global and English. Hold your mouse over any dot to see the name; the full list is in the key below the map.</p>
+    <div class="card mapcard">
+      <svg class="posmap" viewBox="0 0 760 560" role="img" aria-label="Map of the brands studied">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#E0A92E" stop-opacity="0.32"/>
+            <stop offset="100%" stop-color="#E0A92E" stop-opacity="0"/>
+          </radialGradient>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L7,3 L0,6 Z" fill="#9c6b16"/>
+          </marker>
+        </defs>
+        <rect x="80" y="40" width="320" height="220" fill="#f4a3a3" opacity="0.05"/>
+        <rect x="400" y="40" width="320" height="220" fill="#E0A92E" opacity="0.10"/>
+        <rect x="80" y="260" width="320" height="220" fill="#9bb7d4" opacity="0.06"/>
+        <rect x="400" y="260" width="320" height="220" fill="#2E8B8B" opacity="0.06"/>
+        <rect x="402" y="42" width="316" height="216" fill="none" stroke="#E0A92E" stroke-width="2" stroke-dasharray="7 5" rx="6"/>
+        <circle cx="560" cy="150" r="120" fill="url(#glow)"/>
+        <circle cx="560" cy="158" r="33" fill="none" stroke="#E0A92E" stroke-width="2.5" stroke-dasharray="4 4"/>
+        <text x="560" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#9c6b16" letter-spacing="1">THE OPEN SPACE</text>
+        <text x="560" y="110" text-anchor="middle" font-size="10.5" fill="#9c6b16">Greek language · own method · a recognisable teacher · a coach network</text>
+        <text x="560" y="162" text-anchor="middle" font-size="11" font-weight="700" fill="#9c6b16">no brand</text>
+        <text x="560" y="176" text-anchor="middle" font-size="11" font-weight="700" fill="#9c6b16">here yet</text>
+
+        <line x1="80" y1="260" x2="720" y2="260" stroke="#c4ccd6" stroke-width="1.5"/>
+        <line x1="400" y1="40" x2="400" y2="480" stroke="#c4ccd6" stroke-width="1.5"/>
+        <text x="90" y="34" font-size="11.5" fill="#5e7384">↑ Greek language / local market</text>
+        <text x="90" y="498" font-size="11.5" fill="#5e7384">↓ Global / English language</text>
+        <text x="86" y="276" font-size="11.5" fill="#5e7384">General content or resold certificate →</text>
+        <text x="716" y="276" text-anchor="end" font-size="11.5" fill="#5e7384">→ Own method + teacher + coach network</text>
+
+        <path d="M576,188 C 612,232 632,255 632,286" fill="none" stroke="#9c6b16" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)" opacity="0.85"/>
+        <text x="648" y="232" font-size="10" fill="#9c6b16" opacity="0.9">a possible path:</text>
+        <text x="648" y="245" font-size="10" fill="#9c6b16" opacity="0.9">start in Greek,</text>
+        <text x="648" y="258" font-size="10" fill="#9c6b16" opacity="0.9">then go global</text>
+
+        <g id="mapdots"></g>
+      </svg>
+      <div class="grpkey">
+        <span><i class="dot" style="background:#2E8B8B"></i> International brands</span>
+        <span><i class="dot" style="background:#C97B1E"></i> Greek market</span>
+        <span><i class="dot" style="border:2px dashed #E0A92E;background:transparent"></i> The open space</span>
+      </div>
+      <div class="maplegend" id="maplegend"></div>
+    </div>
+    <div class="note info"><span class="h">How to read the map.</span> The bottom-right corner is crowded with international brands that own their method (ATG, Functional Patterns, Liebscher &amp; Bracht and others). The top-left corner is crowded with Greek players selling general content or reselling foreign certificates. The top-right corner — a Greek-language brand with its own method, a recognisable teacher, and a coach network — is empty. The only thing near it is the Sitaras Method, and that one is based in New York, priced for the US, sold in a studio, with no app and no coach network. So the corner is, in practice, open.</div>
+
+    <h3>How big the audience could be</h3>
+    <p>A Greek-language product is not limited to the ten million people in Greece. There are roughly <b>five million more people of Greek origin living abroad</b> (estimates range from three to seven million, depending on how you count), most of them in the United States, Australia, and Germany — all wealthy countries.<sup><a href="#s3">[3]</a></sup> These communities still feel a strong connection to Greek language and culture, which makes them easier to reach and quicker to trust than a cold English-speaking audience. A new brand can serve this worldwide Greek community first, where there is almost no competition, and then add English content to reach everyone else. This is exactly the path Liebscher &amp; Bracht followed: first in German, and only later in English.<sup><a href="#s1">[1]</a></sup></p>
+
+    <h3>The most promising path</h3>
+    <p>Based on what works in this market, the most promising plan is to build the ladder of offers described earlier, in a sensible order:</p>
+    <ol class="steps">
+      <li><b>Start with one clear program that solves a specific, common problem.</b> A sore lower back is the strongest candidate, because so many people search for help with it. Price it above the cheap general libraries (which sit at €10–15 a month), because it is specific and gives a real result.</li>
+      <li><b>Turn it into a monthly subscription with a community and group challenges.</b> This is the steady income, and the community and challenges are what keep people paying — the single most important factor for success in this market.</li>
+      <li><b>Keep a small number of higher-priced personal-coaching places.</b> These bring in good money and strong success stories, but they should stay small, because personal coaching cannot grow without more hours.</li>
+      <li><b>Later, teach and certify other coaches, and build a network of them.</b> Once the method is proven and demand is clear, this is the step that lets income grow without more of the founder's time — and it is the part that almost no one in the Greek market offers today.</li>
+    </ol>
+
+    <div class="card keypoint" style="margin-top:18px">
+      <span class="tag">The gap, in one sentence</span>
+      <p style="margin:2px 0;font-size:16px">The open space is a <b>Greek-language brand for movement, pain relief and mobility — especially for people over 40</b> — built around its own named method and a recognisable coach, that begins with the worldwide Greek community and later expands into English. No brand holds that position today.</p>
+    </div>
+
+    <h3>One advantage we already hold</h3>
+    <p>Most of the brands above had to build their own app and software over several years before they could grow. We already have a ready-made coaching platform and app. That means the subscription, the personal coaching, and the coach network can all be delivered in a proper, branded app from day one, instead of being built from scratch — which is a real head start in a market where the app and the community are what keep customers paying.</p>
+  </section>
+
+  <!-- ============ SOURCES ============ -->
+  <section id="sources">
+    <h2><span class="n">§</span>Sources &amp; notes</h2>
+    <p class="src"><b>About the numbers.</b> Prices and figures come from the companies' own websites and from public industry reports, and they can change over time. Some prices could not be confirmed on an official page and are marked with <span class="vno">~</span>; these should be treated as a rough guide, not an exact quote.</p>
+    <div class="src" style="margin-top:10px">
+      <p id="s1"><b>[1] Liebscher &amp; Bracht and the "start at home, then go global" path:</b> <a href="https://www.liebscher-bracht.com/en/about-us/" target="_blank" rel="noopener">liebscher-bracht.com</a>, <a href="https://www.businessinsider.de/gruenderszene/media/liebscher-und-bracht-raoul-bracht-schmerztherapie-online-marketing-j/" target="_blank" rel="noopener">Business Insider (DE)</a>. Other "small language to global" examples: <a href="https://en.wikipedia.org/wiki/Pamela_Reif" target="_blank" rel="noopener">Pamela Reif</a>, <a href="https://thereadystate.com/" target="_blank" rel="noopener">The Ready State</a>.</p>
+      <p id="s2"><b>[2] How many customers stay (completion and cancellation):</b> <a href="https://www.businessofapps.com/data/health-fitness-app-benchmarks/" target="_blank" rel="noopener">Business of Apps — Health &amp; Fitness benchmarks</a>, <a href="https://retentioncheck.com/churn-benchmarks/fitness-apps" target="_blank" rel="noopener">RetentionCheck</a>, <a href="https://churnkey.co/blog/membership-churn/" target="_blank" rel="noopener">Churnkey</a>, <a href="https://bloggingx.com/online-course-completion-statistics/" target="_blank" rel="noopener">course-completion studies (MIT / Columbia / Teachable)</a>.</p>
+      <p id="s3"><b>[3] Size of the worldwide Greek community:</b> <a href="https://greekreporter.com/2024/06/04/greek-diaspora-around-the-world/" target="_blank" rel="noopener">Greek Reporter</a>, <a href="https://en.wikipedia.org/wiki/Greek_diaspora" target="_blank" rel="noopener">Wikipedia — Greek diaspora</a>, <a href="https://tornosnews.gr/en/world-news/22426-map-countries-with-most-diaspora-greeks-around-the-planet.html" target="_blank" rel="noopener">Tornos News</a>.</p>
+    </div>
+    <p class="src" style="margin-top:10px"><b>Brand websites:</b> davidgreyrehab.com · ikneurology.com · skool.com/bodybuildingnotbodybreaking · atgforcoaches.com · thereadystate.com · gowod.app · pliability.com · squatuniversity.com · functionalpatterns.com · functionalanatomyseminars.com · liebscher-bracht.com · precisionmovement.coach · tommorrison.uk · gmb.io · saturnomovement.com · animalflow.com · thecoach.gr · muscleadvantages.com · hnfc.academy · npfitness.gr.</p>
+  </section>
+
+  <footer>
+    Market research — online coaching for movement, pain relief and mobility · prepared 19/06/2026.<br>
+    The figures are indicative and taken from public sources; they show the general level of the market rather than exact quotes.
+  </footer>
+</main>
+</div>
+</div>
+
+<script>
+const brands = [
+  // group: intl | greek ; methods: prog sub coach cert
+  {num:20, name:"David Grey Rehab", who:"David Grey", group:"intl", region:"Ireland", focus:"Recovery and body-part programs (knee, hip, foot)", pricing:'A program for one body part costs about <b>€197</b> <span class="vok">✓</span>; bundles up to ~€556; a yearly subscription for professionals', methods:["prog","sub"], approxMo:null, lesson:"People will pay about €197 for one program that fixes a single body part, and a trusted coach can sell these straight from a website without answering messages one by one.", url:"https://davidgreyrehab.com", mapX:69, mapY:76},
+  {num:21, name:"Integrated Kinetic Neurology", who:"about 154,000 followers", group:"intl", region:"USA / Ireland", focus:"Courses that certify other professionals", pricing:'Certification courses (level 1 → 2 → specialties); prices not shown publicly <span class="vno">~</span>', methods:["cert"], approxMo:null, lesson:"A training method can be turned into paid courses for other professionals. The courses give official study credits, which keeps people paying — but those credits need medical or clinical standing.", url:"https://ikneurology.com", mapX:79, mapY:51},
+  {num:22, name:"Swolesam", who:"Sam Rosin", group:"intl", region:"USA", focus:"Building muscle while protecting the joints", pricing:'<b>$25 per month</b> <span class="vok">✓</span> for an online community (library + one weekly live call); free trial', methods:["sub"], approxMo:25, lesson:"A simple, memorable slogan plus a low monthly fee and a free trial can build a paying membership without selling one-to-one. But there is no higher-priced option and no coach network, so income per member stays low.", url:"https://www.skool.com/bodybuildingnotbodybreaking", mapX:62, mapY:86},
+
+  {num:7, name:"ATG / Knees Over Toes", who:"Ben Patrick", group:"intl", region:"USA", focus:"Strong, pain-free knees", pricing:'A public app; plus a coach program at <b>$100 / $75 / $50</b> per month by level <span class="vok">✓</span>', methods:["sub","cert"], approxMo:50, lesson:"The owner does not coach people himself. He sells an app to the public and certifies other coaches who pay a monthly fee and do the hands-on work, so the business grows without his own hours.", url:"https://atgforcoaches.com", mapX:89, mapY:62},
+  {num:8, name:"The Ready State", who:"Kelly Starrett", group:"intl", region:"USA", focus:"Mobility and pain routines by body part", pricing:'About <b>$14.99 / month</b> <span class="vno">~</span> (~$155.88 / year), plus professional courses', methods:["sub","cert"], approxMo:15, lesson:"A low monthly subscription with routines organised by body part, with professional courses added on top.", url:"https://thereadystate.com", mapX:60, mapY:55},
+  {num:9, name:"GOWOD", who:"—", group:"intl", region:"France / EU", focus:"Mobility for athletes", pricing:'About <b>$10 / month</b> <span class="vno">~</span>, plus a deal that shares income with gyms', methods:["sub"], approxMo:10, lesson:"The app is free for gym owners, who share the income when their members join. This uses gyms as a sales channel rather than reaching customers one by one.", url:"https://www.gowod.app", mapX:49, mapY:60},
+  {num:10, name:"Pliability", who:"formerly ROMWOD", group:"intl", region:"USA", focus:"Recovery and mobility", pricing:'About <b>$19.99 / month</b> <span class="vno">~</span> (~$179.99 / year); one flat price for everything', methods:["sub"], approxMo:20, lesson:"A single flat monthly price for full access works, and reaches customers in over 100 countries.", url:"https://pliability.com", mapX:45, mapY:71},
+  {num:11, name:"Squat University", who:"Aaron Horschig", group:"intl", region:"USA", focus:"Teaching people about pain and self-diagnosis", pricing:'About <b>$29 / month</b> <span class="vno">~</span> club; plus books', methods:["sub"], approxMo:27, lesson:"A very large amount of free pain-education content brings people in, and then leads them to books and a paid monthly club.", url:"https://squatuniversity.com", mapX:61, mapY:70},
+  {num:12, name:"Functional Patterns", who:"Naudi Aguilar", group:"intl", region:"USA", focus:"Corrective training based on body mechanics", pricing:'A 10-week program at <b>$157.99</b> <span class="vok">✓</span>, leading to a coach certification', methods:["prog","cert"], approxMo:null, lesson:"A fairly cheap program is both a product for the public and the required first step before the expensive coach certification, so one set of content feeds two income streams.", url:"https://functionalpatterns.com", mapX:90, mapY:73},
+  {num:13, name:"Functional Range Conditioning", who:"Dr. Andreo Spina", group:"intl", region:"USA / Canada", focus:"Joint health and range of motion", pricing:'A seminar <span class="vno">~</span>; then coaches pay about <b>$100 / month</b> <span class="vno">~</span> to keep using the method', methods:["cert"], approxMo:100, lesson:"Coaches pay about $100 every month to keep the right to use and teach the method. This monthly fee from coaches is the steadiest, highest-profit income in the whole field.", url:"https://functionalanatomyseminars.com", mapX:81, mapY:64},
+  {num:14, name:"Liebscher & Bracht ★", who:"R. Liebscher-Bracht & Dr. P. Bracht", group:"intl", region:"Germany / EU", focus:"Pain relief (living without pain)", pricing:'An app at <b>€19.95 / month</b> <span class="vok">✓</span>; books; a network of 3,000+ therapists. About €15M a year, 1.5M YouTube followers', methods:["sub","cert"], approxMo:20, lesson:"The most complete business in the field, and it is German rather than American — proof the model works outside the English-speaking world. Free videos lead to an app, books, and a large network of certified therapists.", url:"https://www.liebscher-bracht.com", mapX:93, mapY:51},
+  {num:15, name:"Precision Movement", who:"Eric Wong", group:"intl", region:"Canada", focus:"Mobility and pain, joint by joint", pricing:'Single courses ~$99; a subscription ~<b>$49 / month</b> <span class="vno">~</span>; a cheap app', methods:["prog","sub"], approxMo:10, lesson:"A separate web page for each kind of pain (knee, neck, shoulder) brings people in from online searches, and leads them to a course bundle and a low-cost app.", url:"https://precisionmovement.coach", mapX:53, mapY:52},
+  {num:16, name:"Simplistic Mobility Method", who:"Tom Morrison", group:"intl", region:"UK / EU", focus:"Mobility for people who lift weights", pricing:'<b>£69</b> <span class="vok">✓</span> paid once, kept forever (about €80), plus a community', methods:["prog"], approxMo:null, lesson:"A single, well-named program sold once for under €100 can support a whole business, helped by a free online following and a community for support.", url:"https://tommorrison.uk", mapX:43, mapY:83},
+  {num:17, name:"GMB Fitness", who:"Gold Medal Bodies", group:"intl", region:"USA", focus:"Gymnastics-style functional movement", pricing:'Programs from about $150; each one can be bought once or taken as a subscription', methods:["prog","sub"], approxMo:null, lesson:"The same program is offered both as a one-time purchase and as a subscription, so the same content earns money in two ways.", url:"https://gmb.io", mapX:57, mapY:82},
+  {num:18, name:"Saturno Movement", who:"—", group:"intl", region:"EU", focus:"Calisthenics, mobility and breathing", pricing:'<b>$37 / month</b> <span class="vok">✓</span> or $329 / year; its own app; a community of 20,000+', methods:["sub"], approxMo:37, lesson:"A single flat monthly price for a library of classes, delivered in its own app with a large community — and it is European, not American.", url:"https://saturnomovement.com", mapX:47, mapY:65},
+  {num:19, name:"Animal Flow", who:"Mike Fitch", group:"intl", region:"USA", focus:"Ground-based movement", pricing:'A Level 1 workshop costs about <b>$695</b> <span class="vno">~</span> plus a ~$50 exam', methods:["cert"], approxMo:null, lesson:"A movement method sold mainly through paid instructor certifications and workshops, with a directory of certified instructors. It earns from course fees, not from a share of what instructors later earn.", url:"https://animalflow.com", mapX:73, mapY:67},
+
+  {num:1, name:"The Coach", who:"thecoach.gr", group:"greek", region:"Greece", focus:"A large general home-fitness video library", pricing:'<b>€9.99–15 / month</b> <span class="vok">✓</span> (one year €119.88; three months €44.99)', methods:["sub"], approxMo:9.99, lesson:"Greeks do pay for a monthly fitness subscription, but only about €10–15 a month for a general video library. Competing as a general library means competing on price.", url:"https://thecoach.gr", mapX:16, mapY:14},
+  {num:2, name:"Greek coach marketplaces", who:"instateacher, daskaloi, etc.", group:"greek", region:"Greece", focus:"Ordinary one-to-one coaching, sold by the hour", pricing:'<b>€9–25 per hour</b> (mobility from €6 per hour)', methods:["coach"], approxMo:null, lesson:"Ordinary coaching in Greece is sold by the hour with no brand and nothing to keep customers coming back. Competing on hourly price is a race to the bottom — but these sites are also a pool from which coaches could be recruited.", url:"https://www.instateacher.gr/idiaitera-mathimata/athlitismos/mobility-training", mapX:10, mapY:28},
+  {num:3, name:"HNFC Academy", who:"resells NASM / AFAA", group:"greek", region:"Greece", focus:"Fitness certifications, including corrective work", pricing:'Certifications <b>€390–890</b> <span class="vno">~</span>; prices not shown on the website', methods:["cert"], approxMo:null, lesson:"Greeks pay €390–890 for a fitness certification, but the ones on offer are general and carry a foreign brand. None is built around a Greek coach's own method, and none pays the coach a share when graduates later work.", url:"https://hnfc.academy", mapX:32, mapY:12},
+  {num:4, name:"Muscle Advantages", who:"online coaching (Greece)", group:"greek", region:"Greece", focus:"Personal online coaching for body shape", pricing:'Online personal training <b>€120 / month</b> <span class="vok">✓</span> (was €180); a guidance plan €60 / month <span class="vok">✓</span>', methods:["coach"], approxMo:60, lesson:"Personal online coaching in Greece sells for about €60–120 a month, delivered through messaging apps like Viber and Instagram, with limited places and no dedicated app behind it.", url:"https://muscleadvantages.com", mapX:25, mapY:33},
+  {num:5, name:"NP Fitness", who:"Greece + Greeks abroad", group:"greek", region:"Greece", focus:"Personal coaching and nutrition, in Greek and English", pricing:'Monthly plans; prices not shown <span class="vno">~</span> (international rates ~€150–300 / month)', methods:["coach"], approxMo:null, lesson:"A Greek coaching brand that runs both Greek and English pages to reach Greeks abroad — which shows that selling to the Greek community overseas, at higher prices, is already being done.", url:"https://npfitness.gr", mapX:40, mapY:23},
+  {num:6, name:"Sitaras Method", who:"John Sitaras", group:"greek", region:"Greek-origin / USA", focus:"A named, assessment-based method (higher-priced)", pricing:'Higher-priced (a New York studio; prices not published <span class="vno">~</span>)', methods:["coach"], approxMo:null, lesson:"A coach of Greek origin built a respected, higher-priced business around his own named method. It shows a named method can hold its value — but it is studio-based, US-priced, and has no app or coach network.", url:"https://en.wikipedia.org/wiki/John_Sitaras", mapX:66, mapY:52},
+];
+
+const groupColors={intl:"#2E8B8B",greek:"#C97B1E"};
+const methodNames={prog:"Programs",sub:"Subscription",coach:"Coaching",cert:"Certification"};
+const body=document.getElementById('brandbody');
+let state={group:"all",methods:new Set(),q:"",sortKey:null,sortDir:1};
+
+function methodPills(ms){const map={prog:"c1",sub:"c2",coach:"c3",cert:"c4"};
+  return ms.map(m=>`<span class="pill ${map[m]}" title="${methodNames[m]}">${methodNames[m]}</span>`).join(' ');}
+
+function render(){
+  let rows=brands.filter(b=>{
+    if(state.group!=="all"&&b.group!==state.group)return false;
+    if(state.methods.size&&![...state.methods].some(m=>b.methods.includes(m)))return false;
+    if(state.q){const hay=(b.name+b.who+b.focus+b.lesson+b.region).toLowerCase();if(!hay.includes(state.q))return false;}
+    return true;
+  });
+  if(state.sortKey){
+    rows.sort((a,b)=>{
+      let x=a[state.sortKey],y=b[state.sortKey];
+      if(state.sortKey==='approxMo'){if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return -1;return (x-y)*state.sortDir;}
+      return (''+x).localeCompare(''+y)*state.sortDir;
+    });
+  } else { rows.sort((a,b)=>a.num-b.num); }
+  body.innerHTML=rows.map(b=>`
+    <tr>
+      <td><span class="bn"><a href="${b.url}" target="_blank" rel="noopener">${b.name}</a></span><span class="who">${b.who}</span></td>
+      <td><span class="reg">${b.region}</span></td>
+      <td>${b.focus}</td>
+      <td class="price">${b.pricing}</td>
+      <td class="nowrap">${methodPills(b.methods)}</td>
+      <td class="nowrap">${b.approxMo==null?'<span style="color:var(--muted)">—</span>':'€'+b.approxMo}</td>
+      <td>${b.lesson}</td>
+    </tr>`).join('');
+  document.getElementById('brandcount').textContent=`Showing ${rows.length} of ${brands.length} brands`;
+}
+
+document.getElementById('grpseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  state.group=b.dataset.g;[...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));render();});
+document.getElementById('mchips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  const m=b.dataset.m;if(state.methods.has(m)){state.methods.delete(m);b.classList.remove('on');}else{state.methods.add(m);b.classList.add('on');}render();});
+document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.toLowerCase().trim();render();});
+document.querySelectorAll('#brandtable th.sortable').forEach(th=>{th.addEventListener('click',()=>{
+  const k=th.dataset.k;if(state.sortKey===k){state.sortDir*=-1;}else{state.sortKey=k;state.sortDir=1;}
+  document.querySelectorAll('#brandtable th.sortable').forEach(x=>x.classList.remove('sortasc','sortdesc'));
+  th.classList.add(state.sortDir===1?'sortasc':'sortdesc');render();});});
+render();
+
+// ---- positioning map ----
+const PX={x0:80,x1:720,y0:40,y1:480};
+function mp(b){return{x:PX.x0+(b.mapX/100)*(PX.x1-PX.x0),y:PX.y0+(b.mapY/100)*(PX.y1-PX.y0)};}
+document.getElementById('mapdots').innerHTML=brands.map(b=>{
+  const p=mp(b),col=groupColors[b.group];
+  return `<g class="pt"><title>${b.num}. ${b.name}</title>
+    <circle cx="${p.x.toFixed(0)}" cy="${p.y.toFixed(0)}" r="11" fill="${col}" stroke="#fff" stroke-width="1.5"/>
+    <text x="${p.x.toFixed(0)}" y="${(p.y+3.6).toFixed(0)}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${b.num}</text></g>`;
+}).join('');
+document.getElementById('maplegend').innerHTML=[...brands].sort((a,b)=>a.num-b.num).map(b=>`
+  <div class="li"><span class="bb" style="background:${groupColors[b.group]}">${b.num}</span><span class="nm">${b.name}</span></div>`).join('');
+
+// ---- theme toggle ----
+const tb=document.getElementById('themeBtn');
+tb.addEventListener('click',()=>{document.body.classList.toggle('dark');
+  tb.textContent=document.body.classList.contains('dark')?'☀ Light':'🌙 Dark';});
+
+// ---- scrollspy ----
+const links=[...document.querySelectorAll('nav.toc a')];
+const linkMap=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+const spy=new IntersectionObserver((es)=>{es.forEach(en=>{if(en.isIntersecting){
+  links.forEach(l=>l.classList.remove('active'));
+  const a=linkMap.get(en.target.id);if(a)a.classList.add('active');
+}});},{rootMargin:"-20% 0px -70% 0px"});
+document.querySelectorAll('main section').forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>

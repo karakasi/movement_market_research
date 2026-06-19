@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Research — Access</title>
+<style>
+  :root{
+    --navy:#1F3A5F; --teal:#2E8B8B; --teal-deep:#1f6b6b; --ink:#1d2530;
+    --line:#dfe4ec; --muted:#5e7384; --bad:#b4453a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(135deg,#1F3A5F,#15466e 55%,#1f6b6b);color:var(--ink)}
+  .card{background:#fff;width:100%;max-width:440px;border-radius:18px;padding:38px 34px;
+    box-shadow:0 18px 50px rgba(0,0,0,.28);text-align:center}
+  .lock{width:54px;height:54px;border-radius:14px;background:rgba(46,139,139,.12);color:var(--teal-deep);
+    display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 16px}
+  h1{font-size:20px;color:var(--navy);margin:0 0 6px;font-weight:740}
+  p.sub{color:var(--muted);font-size:14px;margin:0 0 22px;line-height:1.5}
+  label{display:block;text-align:left;font-size:12.5px;color:var(--muted);font-weight:600;margin:0 0 6px}
+  input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;font-size:16px;color:var(--ink)}
+  input:focus{outline:none;border-color:var(--teal)}
+  button.go{margin-top:14px;width:100%;padding:13px;border:0;border-radius:10px;background:var(--navy);color:#fff;
+    font-size:15px;font-weight:700;cursor:pointer}
+  button.go:hover{background:#274a76}
+  .err{color:var(--bad);font-size:13px;margin-top:12px;min-height:18px}
+  /* language selector */
+  .pick{display:none}
+  .pick h1{margin-bottom:18px}
+  .langs{display:flex;flex-direction:column;gap:12px}
+  a.lang{display:flex;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;
+    border:1px solid var(--line);border-radius:12px;padding:16px 18px;color:var(--navy);font-weight:700;font-size:16px;
+    transition:border-color .15s,background .15s}
+  a.lang:hover{border-color:var(--teal);background:rgba(46,139,139,.06)}
+  a.lang .flag{font-size:22px}
+  a.lang .arrow{color:var(--teal-deep);font-weight:700}
+  .foot{margin-top:22px;font-size:11.5px;color:var(--muted)}
+  .linklike{background:none;border:0;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;margin-top:14px}
+</style>
+</head>
+<body>
+  <div class="card">
+    <!-- LOGIN -->
+    <div id="login">
+      <div class="lock">🔒</div>
+      <h1>Market Research</h1>
+      <p class="sub">This report is private. Please enter the password to continue.<br><span style="font-size:12.5px">Αυτή η αναφορά είναι ιδιωτική. Εισάγετε τον κωδικό για να συνεχίσετε.</span></p>
+      <label for="pw">Password · Κωδικός</label>
+      <input id="pw" type="password" autocomplete="off" autofocus>
+      <button class="go" id="goBtn">Enter · Είσοδος</button>
+      <div class="err" id="err"></div>
+    </div>
+
+    <!-- LANGUAGE PICKER -->
+    <div id="pick" class="pick">
+      <div class="lock">📄</div>
+      <h1>Choose a language · Επιλέξτε γλώσσα</h1>
+      <div class="langs">
+        <a class="lang" href="Market_Research_Movement_Coaching_EL.html"><span><span class="flag">🇬🇷</span>&nbsp; Ελληνικά</span><span class="arrow">→</span></a>
+        <a class="lang" href="Market_Research_Movement_Coaching.html"><span><span class="flag">🇬🇧</span>&nbsp; English</span><span class="arrow">→</span></a>
+      </div>
+      <button class="linklike" id="out">Log out · Αποσύνδεση</button>
+    </div>
+  </div>
+
+<script>
+  // ---- Simple front-end gate. Change the password on the next line. ----
+  const PASSWORD = "panos2026";
+
+  const login = document.getElementById('login');
+  const pick  = document.getElementById('pick');
+  const pw    = document.getElementById('pw');
+  const err   = document.getElementById('err');
+
+  function showPicker(){ login.style.display='none'; pick.style.display='block'; }
+  function showLogin(){ pick.style.display='none'; login.style.display='block'; pw.value=''; err.textContent=''; pw.focus(); }
+
+  // stay logged in for the browser session
+  if (sessionStorage.getItem('mmr_auth') === '1') showPicker();
+
+  function attempt(){
+    if (pw.value === PASSWORD){
+      sessionStorage.setItem('mmr_auth','1');
+      err.textContent='';
+      showPicker();
+    } else {
+      err.textContent = 'Wrong password · Λάθος κωδικός';
+      pw.select();
+    }
+  }
+
+  document.getElementById('goBtn').addEventListener('click', attempt);
+  pw.addEventListener('keydown', e => { if (e.key === 'Enter') attempt(); });
+  document.getElementById('out').addEventListener('click', () => { sessionStorage.removeItem('mmr_auth'); showLogin(); });
+</script>
+</body>
+</html>
