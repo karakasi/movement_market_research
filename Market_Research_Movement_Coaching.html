@@ -457,7 +457,7 @@ function render(){
       <td><span class="reg">${b.region}</span></td>
       <td>${b.focus}</td>
       <td class="price">${b.pricing}</td>
-      <td class="nowrap">${methodPills(b.methods)}</td>
+      <td>${methodPills(b.methods)}</td>
       <td class="nowrap">${b.approxMo==null?'<span style="color:var(--muted)">—</span>':'€'+b.approxMo}</td>
       <td>${b.lesson}</td>
     </tr>`).join('');
